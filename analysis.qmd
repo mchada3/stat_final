@@ -1,0 +1,380 @@
+# Analysis
+
+This page presents the analysis conducted to address the research questions. The sections below contain clear inputs, outputs, and interpretations for each research question.
+
+------------------------------------------------------------------------
+
+## Research Question 1: Can we accurately predict the price of a car.
+
+**Objective**: accurately predicting length of car door .
+
+```{r echo=FALSE}
+# Load necessary libraries
+library(caret)
+library(dplyr)
+
+# Load the dataset
+cars_data <- read.csv("finalclean_cars_data.csv")
+
+
+# Define the target (Length) and predictors
+target <- "price"
+predictors <- c("Length", "Width", "Height", "Doors","fuel")
+
+# Handle missing values
+cars_data <- cars_data %>%
+  mutate(across(where(is.numeric), ~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>%
+  mutate(across(where(is.character), ~ifelse(is.na(.), as.character(stats::mode(.)), .)))
+
+# Select relevant columns
+cars_data <- cars_data %>% select(all_of(c(target, predictors)))
+
+# Set seed for reproducibility
+set.seed(42)
+
+# Split the data into training and testing sets
+trainIndex <- createDataPartition(cars_data$Length, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+train_data <- cars_data[trainIndex, ]
+test_data <- cars_data[-trainIndex, ]
+
+# Fit a linear regression model
+model <- lm(Length ~ ., data = train_data)
+
+
+
+```
+
+```{r}
+# Predict on the test set
+predictions <- predict(model, newdata = test_data)
+
+# Calculate RMSE
+rmse <- sqrt(mean((predictions - test_data$Length)^2))
+# Calculate R²
+r2 <- 1 - (sum((predictions - test_data$Length)^2) / 
+           sum((mean(test_data$Length) - test_data$Length)^2))
+
+# Calculate Prediction Accuracy (PA)
+accuracy <- 1 - (sum(abs(predictions - test_data$Length)) / sum(test_data$Length))
+
+
+```
+
+```{r}
+# Output evaluation metrics
+cat("RMSE:", rmse, "\n")
+cat("R²:", r2, "\n")
+cat("Accuracy:", accuracy * 100, "%\n")
+```
+
+```{r}
+results <- data.frame(
+  Actual = test_data$price,
+  Predicted = predictions
+)
+
+# Print a sample of the results
+head(results)
+
+
+```
+
+```{r}
+# Using linear model coefficients as feature importance (scaled by the magnitude)
+coef_df = data.frame(Feature = names(coef(model))[-1], Importance = abs(coef(model))[-1])
+coef_df = coef_df[order(-coef_df$Importance),]
+
+# Plot feature importance
+ggplot(coef_df, aes(x = reorder(Feature, Importance), y = Importance)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Feature Importance", x = "Feature", y = "Importance") +
+  theme_minimal()
+
+
+
+```
+
+**Output**:
+
+The model predicts the car price with an accuracy of 95.75% and an RMSE of 286.65, which indicates its strong performance. The important features that contribute significantly include length, width, and height, with predictions closely matching the actual values. This therefore underlines the effectiveness of basic car features in determining price.
+
+------------------------------------------------------------------------
+
+## Research Question 2: How Does Mileage Vary Across Car Brands and Models?
+
+**Objective**: Analyze mileage distribution across different car brands and models.
+
+```{r }
+#How does mileage vary across different car brands and models? 
+# Load required libraries
+library(dplyr)
+library(ggplot2)
+
+# Load the dataset
+data121 = read.csv("1finalclean_cars_data.csv")  # Replace with actual file path
+
+# Inspect the dataset structure
+
+
+# Summarize mileage by brand and mode
+mileage_summary = data121 %>%
+  group_by(brand) %>%
+  summarise(
+    avg_mileage = mean(mileage, na.rm = TRUE),  # Calculate average mileage
+    min_mileage = min(mileage, na.rm = TRUE),  # Calculate minimum mileage
+    max_mileage = max(mileage, na.rm = TRUE),  # Calculate maximum mileage
+    count = n()  # Count the number of records for each brand and model
+  ) %>%
+  arrange(desc(avg_mileage))  # Sort by average mileage (highest to lowest)
+
+
+```
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+# Visualize mileage variation by brand
+mileage_plot = ggplot(mileage_summary, aes(x = reorder(brand, -avg_mileage), y = avg_mileage)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  coord_flip() +
+  labs(
+    title = "Average Mileage by Brand",
+    x = "Brand",
+    y = "Average Mileage"
+  ) +
+  theme_minimal()
+
+# Convert to interactive plotly chart
+interactive_mileage_plot = ggplotly(mileage_plot)
+
+# Render the interactive plot
+interactive_mileage_plot
+```
+
+```{r}
+library(caret)
+library(randomForest)
+
+# Load and clean the dataset
+data_clean = data121 %>%
+  filter(!is.na(mileage) & !is.na(brand))  # Remove rows with missing mileage or brand
+
+# Convert 'brand' to a factor (Random Forest can handle categorical variables)
+data_clean$brand = as.factor(data_clean$brand)
+
+# Split the dataset into training and testing sets
+set.seed(123)
+train_index = createDataPartition(data_clean$mileage, p = 0.7, list = FALSE)
+train_data = data_clean[train_index, ]
+test_data = data_clean[-train_index, ]
+
+# Train a Random Forest model to predict mileage
+rf_model = randomForest(
+  mileage ~ brand,  # Predict mileage using brand as a feature
+  data = train_data,
+  ntree = 500,      # Number of trees
+  mtry = 2,         # Number of variables tried at each split (default: sqrt(num_features))
+  importance = TRUE # Enable variable importance calculation
+)
+
+
+```
+
+```{r}
+# Plot variable importance
+varImpPlot(rf_model)
+
+```
+
+```{r}
+# Make predictions on the test set
+predictions = predict(rf_model, newdata = test_data)
+
+# Evaluate the model performance
+rmse = sqrt(mean((test_data$mileage - predictions)^2))  # Root Mean Squared Error
+
+```
+
+```{r}
+# Compare actual vs predicted mileage
+comparison = data.frame(
+  Actual = test_data$mileage,
+  Predicted = predictions
+)
+print(head(comparison))
+```
+
+**Output**:
+
+The mileage variation across and within brands and models essentially indicates the driving pattern varies with each brand. While most economy brands have higher mileage, reflecting heavier usage and their reliability in the process, most luxury brands have lower mileage, indicating mostly new or less used cars.. This could help buyers estimate the condition of the vehicle and the wear and tear it is likely to sustain.
+
+------------------------------------------------------------------------
+
+## Research Question 3: Trends in Drive Types Based on Car Brands or Year of Manufacture
+
+**Objective**: Identify trends in drive types across brands and years.
+
+```{r}
+library(randomForest)
+library(caret)
+library(dplyr)
+library(ggplot2)
+
+# Load the dataset
+data = read.csv("filtered_filled_cars_data.csv")
+
+# Explore the dataset
+str(data)
+
+
+# Filter for complete cases (remove rows with missing values in relevant columns)
+data = data %>% filter(!is.na(Drive.Type) & !is.na(brand) & !is.na(myear))
+
+# Convert categorical variables to factors
+data$Drive.Type = as.factor(data$Drive.Type)
+data$brand = as.factor(data$brand)
+# Split the data into training (70%) and testing (30%) sets
+set.seed(123)
+train_index = createDataPartition(data$Drive.Type, p = 0.7, list = FALSE)
+train_data = data[train_index, ]
+test_data = data[-train_index, ]
+
+# Train a Random Forest model to predict Drive.Type
+rf_model = randomForest(
+  Drive.Type ~ brand + myear,
+  data = train_data,
+  importance = TRUE,
+  ntree = 500
+)
+
+# Display the model summary
+print(rf_model)
+
+
+```
+
+```{r}
+# Variable importance plot
+varImpPlot(rf_model)
+
+
+```
+
+```{r}
+
+# Analyze trends: Proportion of drive types by brand
+brand_drive_trends = data %>%
+  group_by(brand, Drive.Type) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(proportion = count / sum(count))
+```
+
+```{r}
+# Visualize drive type trends by brand
+
+# Reduce to top 15 brands by total count
+top_brands = brand_drive_trends %>%
+  group_by(brand) %>%
+  summarise(total_count = sum(count)) %>%
+  arrange(desc(total_count)) %>%
+  slice_head(n = 15)
+
+# Filter only top brands
+brand_drive_trends_top = brand_drive_trends %>%
+  filter(brand %in% top_brands$brand)
+
+# Ensure proportion is computed if not already
+brand_drive_trends_top = brand_drive_trends_top %>%
+  group_by(brand) %>%
+  mutate(proportion = count / sum(count))
+
+# Sort brands by proportion of the largest drive type
+brand_drive_trends_top = brand_drive_trends_top %>%
+  arrange(desc(proportion))
+
+# Create a clearer bar plot
+library(ggplot2)
+ggplot(brand_drive_trends_top, aes(x = reorder(brand, -proportion), y = proportion, fill = Drive.Type)) +
+  geom_bar(stat = "identity", position = "fill") +
+  coord_flip() +
+  scale_fill_brewer(palette = "Set3") +  # Use a more distinguishable color palette
+  labs(
+    title = "Proportion of Drive Types by Top 15 Brands",
+    x = "Brand",
+    y = "Proportion",
+    fill = "Drive Type"
+  ) +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 12),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom"
+  )
+
+
+
+```
+
+```{r}
+# Analyze trends: Proportion of drive types by year of manufacture
+year_drive_trends = data %>%
+  group_by(myear, Drive.Type) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(proportion = count / sum(count))
+
+# Visualize drive type trends by year
+
+###
+# Make predictions on the test set
+predictions = predict(rf_model, newdata = test_data)
+
+```
+
+```{r}
+# Evaluate model performance using a confusion matrix
+confusion_matrix = confusionMatrix(predictions, test_data$Drive.Type)
+
+# Display confusion matrix
+print(confusion_matrix)
+
+```
+
+```{r}
+ #Calculate accuracy from the confusion matrix
+accuracy = confusion_matrix$overall["Accuracy"]
+cat("Accuracy of Random Forest Model:", round(accuracy * 100, 2), "%\n")
+```
+
+**Interpretation**:
+
+**How Well the Model of Random Forest Works Out:**
+
+88.84%: The model effectively classifies the drive types according to the brand and the year of manufacture.
+
+**Emerging Trends in Drive Types:**
+
+-   FWD: High in demand due to economical and fuel-efficient reasons for compact cars
+
+-   AWD: Finding its place in SUVs and higher models since more people use their vehicles for a number of different situations.
+
+-   4WD (Four-Wheel Drive): It is used in off-road or rugged vehicles, hence preferred in certain niche markets.
+
+-   RWD (Rear-Wheel Drive): Common in performance and luxury cars.
+
+**Consumer Shifts Over Time:**
+
+The increasing momentum of FWDs is indicative of the market's move toward fuel efficiency and urban-friendly vehicles. Continuous demand for AWD and 4WD caters to the needs of adventurers and luxury car buyers.
+
+------------------------------------------------------------------------
+
+
+
+<footer style="text-align: center; margin-top: 20px;">
+
+© 2024 Car Price Prediction Project
+
+</footer>

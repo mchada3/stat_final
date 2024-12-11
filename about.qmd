@@ -1,0 +1,43 @@
+# About the Team
+
+We are a team of enthusiastic statisticians committed to leveraging data and advanced statistical techniques to uncover actionable insights and build impactful solutions.
+
+Meet our team:
+
+## Team Members
+
+### Member 1: Medha Chada
+
+![](images/IMG_0682.jpg){width="300"}
+
+-   **Role:** Quarto website and Data Visualisation
+
+-   **Expertise:** Building the Quarto website, statistical modeling, and creating engaging and insightful data visualizations.
+
+-   **linkdlyn:** <https://in.linkedin.com/in/medha-chada-845b6a225>
+
+------------------------------------------------------------------------
+
+### Member 2: Rishika Reddy Baddam
+
+![](images/clipboard-337522722.png){width="300"}
+
+-   **Role:** Data Visualization and Model Evaluation
+-   **Expertise:** Data cleaning, feature engineering, and evaluating model performance through visual and statistical methods.
+-   **LinkedIn:** <https://www.linkedin.com/in/rishika-baddam-68010920b/>
+
+------------------------------------------------------------------------
+
+### Member 3: Bharath Vardhan Reddy Ravula
+
+![](images/IMG_1741.jpg){width="242"}
+
+-   **Role:** Regression analysis and Model Evaluation
+
+-   **Expertise:** Building predictive models, regression analysis, and performance evaluation using advanced statistical techniques.
+
+-   LinkedIn: <https://in.linkedin.com/in/r-bharath-vardhan-reddy-110105225>
+
+------------------------------------------------------------------------
+
+<footer>© 2024 STAT 515 Final Project</footer>

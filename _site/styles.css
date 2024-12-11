@@ -1,0 +1,41 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+}
+
+.navbar {
+  background-color: #34495e;
+}
+
+.navbar a {
+  color: #ecf0f1 !important;
+}
+
+blockquote {
+  background: #f8f9fa;
+  border-left: 5px solid #3498db;
+  padding: 10px 20px;
+  font-style: italic;
+  color: #555;
+}
+
+pre, code {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+

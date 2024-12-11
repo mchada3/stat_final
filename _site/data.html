@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>STAT 515 Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 515 Final Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./data.html" aria-current="page"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./analysis.html"> 
+<span class="menu-text">Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion.html"> 
+<span class="menu-text">Discussion</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html"> 
+<span class="menu-text">References</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link active" data-scroll-target="#data-overview">Data Overview</a>
+  <ul class="collapse">
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a>
+  <ul class="collapse">
+  <li><a href="#total-count-of-cars-by-year-and-brand" id="toc-total-count-of-cars-by-year-and-brand" class="nav-link" data-scroll-target="#total-count-of-cars-by-year-and-brand">Total Count of Cars by Year and Brand</a></li>
+  <li><a href="#distribution-of-transmission-types-by-brand" id="toc-distribution-of-transmission-types-by-brand" class="nav-link" data-scroll-target="#distribution-of-transmission-types-by-brand">Distribution of Transmission Types by Brand</a></li>
+  <li><a href="#average-car-price-by-year-line-chart" id="toc-average-car-price-by-year-line-chart" class="nav-link" data-scroll-target="#average-car-price-by-year-line-chart">Average Car Price by Year (Line Chart)</a></li>
+  <li><a href="#average-car-price-by-brand-interactive-bar-graph" id="toc-average-car-price-by-brand-interactive-bar-graph" class="nav-link" data-scroll-target="#average-car-price-by-brand-interactive-bar-graph">Average Car Price by Brand (Interactive Bar Graph)</a></li>
+  </ul></li>
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">Key Insights</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="data-overview" class="level1">
+<h1>Data Overview</h1>
+<p>Our analysis relies on the extensive data on cars, their respective characteristics, or attributes. The data we used in our work have undergone extensive cleaning and thus guarantee good quality and uniformity. Important variables to note include the following:</p>
+<ul>
+<li><strong>Year of Manufacture (<code>myear</code>)</strong>: Year in which the car was made.</li>
+<li><strong>Listed Price (<code>price</code>)</strong>: Listed price of the car</li>
+<li><strong>Transmission (<code>transmission</code>)</strong>: What transmission it is (ex. Manual, auto.).</li>
+<li><strong>Mileage (<code>mileage</code>)</strong>: Total distance the car has been driven, in kilometers.</li>
+<li><strong>Exterior Color (<code>Color</code>)</strong>: Color of the car.</li>
+<li><strong>Drive Type (<code>Drive Type</code>)</strong>: Type of drivetrain: FWD, RWD, or 2WD.</li>
+<li><strong>Brand (<code>brand</code>)</strong>: Brand of the car; for example, Maruti, Honda, Hyundai.</li>
+<li><strong>Fuel Type (<code>fuel</code>)</strong>: Type of fuel used by the car; for example, CNG.</li>
+<li><strong>Body Type (<code>body</code>)</strong>: Body type of the car; for example, sedan, hatchback, MUV.</li>
+</ul>
+<hr>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
+<p>Below are key insights derived from the dataset:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'
+
+The following object is masked from 'package:ggplot2':
+
+    last_plot
+
+The following object is masked from 'package:stats':
+
+    filter
+
+The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"finalclean_cars_data.csv"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the dataset</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     myear          price           transmission          mileage       
+ Min.   :1986   Min.   :    11963   Length:37078       Min.   :    101  
+ 1st Qu.:2013   1st Qu.:   321000   Class :character   1st Qu.:  31820  
+ Median :2016   Median :   529000   Mode  :character   Median :  56544  
+ Mean   :2016   Mean   :   798582                      Mean   :  62376  
+ 3rd Qu.:2018   3rd Qu.:   866000                      3rd Qu.:  83134  
+ Max.   :2023   Max.   :550000555                      Max.   :6300000  
+    Color            Drive.Type            Doors           Length    
+ Length:37078       Length:37078       Min.   :2.000   Min.   :2752  
+ Class :character   Class :character   1st Qu.:4.000   1st Qu.:3795  
+ Mode  :character   Mode  :character   Median :5.000   Median :3995  
+                                       Mean   :4.663   Mean   :4113  
+                                       3rd Qu.:5.000   3rd Qu.:4440  
+                                       Max.   :6.000   Max.   :5469  
+     Width          Height       Wheel.Base      brand          
+ Min.   :1312   Min.   :1165   Min.   :1840   Length:37078      
+ 1st Qu.:1677   1st Qu.:1495   1st Qu.:2425   Class :character  
+ Median :1710   Median :1530   Median :2520   Mode  :character  
+ Mean   :1726   Mean   :1577   Mean   :2545                     
+ 3rd Qu.:1790   3rd Qu.:1642   3rd Qu.:2642                     
+ Max.   :2226   Max.   :2075   Max.   :3396                     
+     fuel               body              fuel.1         
+ Length:37078       Length:37078       Length:37078      
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+                                                         
+                                                         
+                                                         </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display column data types</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   37078 obs. of  15 variables:
+ $ myear       : int  2016 2015 2015 2013 2022 2012 2010 2017 2021 2011 ...
+ $ price       : num  370000 365000 421000 240000 1175000 ...
+ $ transmission: chr  "manual" "manual" "manual" "manual" ...
+ $ mileage     : num  69162 45864 81506 115893 18900 ...
+ $ Color       : chr  "silver" "grey" "silver" "silver" ...
+ $ Drive.Type  : chr  "fwd" "fwd" "fwd" "fwd" ...
+ $ Doors       : num  5 5 4 4 5 5 5 5 5 5 ...
+ $ Length      : num  3599 3600 3990 3595 4395 ...
+ $ Width       : num  1495 1600 1680 1475 1735 ...
+ $ Height      : num  1700 1560 1505 1700 1690 ...
+ $ Wheel.Base  : num  2400 2425 2405 2400 2740 ...
+ $ brand       : chr  "maruti" "maruti" "honda" "maruti" ...
+ $ fuel        : chr  "cng" "cng" "cng" "cng" ...
+ $ body        : chr  "hatchback" "hatchback" "sedan" "hatchback" ...
+ $ fuel.1      : chr  "cng" "cng" "cng" "cng" ...</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="visualizations">Visualizations</h2>
+<section id="total-count-of-cars-by-year-and-brand" class="level3">
+<h3 class="anchored" data-anchor-id="total-count-of-cars-by-year-and-brand">Total Count of Cars by Year and Brand</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>aggregated_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(myear, brand) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>interactive_stacked_bar <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> aggregated_data,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>myear,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>count,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="sc">~</span>brand,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"bar"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">colors =</span> <span class="fu">colorRampPalette</span>(RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">12</span>, <span class="st">"Paired"</span>))(<span class="fu">length</span>(<span class="fu">unique</span>(aggregated_data<span class="sc">$</span>brand))),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand: "</span>, brand,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Year: "</span>, myear,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Count of Cars: "</span>, count</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">hoverinfo =</span> <span class="st">"text"</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">barmode =</span> <span class="st">"stack"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Total Count of Cars by Year and Brand (Interactive)"</span>, <span class="at">font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">24</span>)),</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>),</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Count of Cars"</span>),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Brand"</span>))</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>interactive_stacked_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-d07f0b4d24d1bd0b3ee3" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d07f0b4d24d1bd0b3ee3">{"x":{"visdat":{"ca7c6e7af0cb":["function () ","plotlyVisDat"]},"cur_data":"ca7c6e7af0cb","attrs":{"ca7c6e7af0cb":{"x":{},"y":{},"text":{},"hoverinfo":"text","color":{},"colors":["#A6CEE3","#82B7D6","#5FA0CA","#3B8ABE","#257CB2","#4C97A7","#72B29C","#99CD91","#A5D981","#84C868","#63B84F","#42A737","#4F9F3B","#839D58","#B89B74","#EC9A91","#F68181","#F06060","#E93E3F","#E31D1E","#E9412F","#F06C45","#F6975B","#FDBD6C","#FDAC4F","#FE9B32","#FE8B15","#FB820F","#ED8F47","#DF9D7F","#D1AAB7","#BEA4CE","#A585BF","#8C66AF","#73489F","#825D99","#A99099","#D0C299","#F7F599","#EEDB80","#D9AF63","#C58445","#B15928"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","title":{"text":"Total Count of Cars by Year and Brand (Interactive)","font":{"size":24}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count of Cars"},"legend":{"title":{"text":"Brand"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2014],"y":[1],"text":"Brand:  ashok leyland <br>Year:  2014 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"ashok leyland","marker":{"color":"rgba(166,206,227,1)","line":{"color":"rgba(166,206,227,1)"}},"textfont":{"color":"rgba(166,206,227,1)"},"error_y":{"color":"rgba(166,206,227,1)"},"error_x":{"color":"rgba(166,206,227,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2019],"y":[1],"text":"Brand:  aston martin <br>Year:  2019 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"aston martin","marker":{"color":"rgba(130,183,214,1)","line":{"color":"rgba(130,183,214,1)"}},"textfont":{"color":"rgba(130,183,214,1)"},"error_y":{"color":"rgba(130,183,214,1)"},"error_x":{"color":"rgba(130,183,214,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[1,2,4,8,38,43,85,128,114,68,69,40,19,17,21,5],"text":["Brand:  audi <br>Year:  2007 <br>Count of Cars:  1","Brand:  audi <br>Year:  2008 <br>Count of Cars:  2","Brand:  audi <br>Year:  2009 <br>Count of Cars:  4","Brand:  audi <br>Year:  2010 <br>Count of Cars:  8","Brand:  audi <br>Year:  2011 <br>Count of Cars:  38","Brand:  audi <br>Year:  2012 <br>Count of Cars:  43","Brand:  audi <br>Year:  2013 <br>Count of Cars:  85","Brand:  audi <br>Year:  2014 <br>Count of Cars:  128","Brand:  audi <br>Year:  2015 <br>Count of Cars:  114","Brand:  audi <br>Year:  2016 <br>Count of Cars:  68","Brand:  audi <br>Year:  2017 <br>Count of Cars:  69","Brand:  audi <br>Year:  2018 <br>Count of Cars:  40","Brand:  audi <br>Year:  2019 <br>Count of Cars:  19","Brand:  audi <br>Year:  2020 <br>Count of Cars:  17","Brand:  audi <br>Year:  2021 <br>Count of Cars:  21","Brand:  audi <br>Year:  2022 <br>Count of Cars:  5"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"audi","marker":{"color":"rgba(95,160,202,1)","line":{"color":"rgba(95,160,202,1)"}},"textfont":{"color":"rgba(95,160,202,1)"},"error_y":{"color":"rgba(95,160,202,1)"},"error_x":{"color":"rgba(95,160,202,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2019,2022],"y":[2,1],"text":["Brand:  bajaj <br>Year:  2019 <br>Count of Cars:  2","Brand:  bajaj <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text"],"type":"bar","name":"bajaj","marker":{"color":"rgba(59,138,190,1)","line":{"color":"rgba(59,138,190,1)"}},"textfont":{"color":"rgba(59,138,190,1)"},"error_y":{"color":"rgba(59,138,190,1)"},"error_x":{"color":"rgba(59,138,190,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2009,2012,2014],"y":[1,1,1],"text":["Brand:  bentley <br>Year:  2009 <br>Count of Cars:  1","Brand:  bentley <br>Year:  2012 <br>Count of Cars:  1","Brand:  bentley <br>Year:  2014 <br>Count of Cars:  1"],"hoverinfo":["text","text","text"],"type":"bar","name":"bentley","marker":{"color":"rgba(37,124,178,1)","line":{"color":"rgba(37,124,178,1)"}},"textfont":{"color":"rgba(37,124,178,1)"},"error_y":{"color":"rgba(37,124,178,1)"},"error_x":{"color":"rgba(37,124,178,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[3,13,18,26,64,58,71,67,51,62,97,71,53,38,29,17,1],"text":["Brand:  bmw <br>Year:  2007 <br>Count of Cars:  3","Brand:  bmw <br>Year:  2008 <br>Count of Cars:  13","Brand:  bmw <br>Year:  2009 <br>Count of Cars:  18","Brand:  bmw <br>Year:  2010 <br>Count of Cars:  26","Brand:  bmw <br>Year:  2011 <br>Count of Cars:  64","Brand:  bmw <br>Year:  2012 <br>Count of Cars:  58","Brand:  bmw <br>Year:  2013 <br>Count of Cars:  71","Brand:  bmw <br>Year:  2014 <br>Count of Cars:  67","Brand:  bmw <br>Year:  2015 <br>Count of Cars:  51","Brand:  bmw <br>Year:  2016 <br>Count of Cars:  62","Brand:  bmw <br>Year:  2017 <br>Count of Cars:  97","Brand:  bmw <br>Year:  2018 <br>Count of Cars:  71","Brand:  bmw <br>Year:  2019 <br>Count of Cars:  53","Brand:  bmw <br>Year:  2020 <br>Count of Cars:  38","Brand:  bmw <br>Year:  2021 <br>Count of Cars:  29","Brand:  bmw <br>Year:  2022 <br>Count of Cars:  17","Brand:  bmw <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"bmw","marker":{"color":"rgba(76,151,167,1)","line":{"color":"rgba(76,151,167,1)"}},"textfont":{"color":"rgba(76,151,167,1)"},"error_y":{"color":"rgba(76,151,167,1)"},"error_x":{"color":"rgba(76,151,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018],"y":[3,1,12,58,82,149,136,94,127,108,46,29,11,1],"text":["Brand:  chevrolet <br>Year:  2004 <br>Count of Cars:  3","Brand:  chevrolet <br>Year:  2006 <br>Count of Cars:  1","Brand:  chevrolet <br>Year:  2007 <br>Count of Cars:  12","Brand:  chevrolet <br>Year:  2008 <br>Count of Cars:  58","Brand:  chevrolet <br>Year:  2009 <br>Count of Cars:  82","Brand:  chevrolet <br>Year:  2010 <br>Count of Cars:  149","Brand:  chevrolet <br>Year:  2011 <br>Count of Cars:  136","Brand:  chevrolet <br>Year:  2012 <br>Count of Cars:  94","Brand:  chevrolet <br>Year:  2013 <br>Count of Cars:  127","Brand:  chevrolet <br>Year:  2014 <br>Count of Cars:  108","Brand:  chevrolet <br>Year:  2015 <br>Count of Cars:  46","Brand:  chevrolet <br>Year:  2016 <br>Count of Cars:  29","Brand:  chevrolet <br>Year:  2017 <br>Count of Cars:  11","Brand:  chevrolet <br>Year:  2018 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"chevrolet","marker":{"color":"rgba(114,178,156,1)","line":{"color":"rgba(114,178,156,1)"}},"textfont":{"color":"rgba(114,178,156,1)"},"error_y":{"color":"rgba(114,178,156,1)"},"error_x":{"color":"rgba(114,178,156,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2021,2022],"y":[5,2],"text":["Brand:  citroen <br>Year:  2021 <br>Count of Cars:  5","Brand:  citroen <br>Year:  2022 <br>Count of Cars:  2"],"hoverinfo":["text","text"],"type":"bar","name":"citroen","marker":{"color":"rgba(153,205,145,1)","line":{"color":"rgba(153,205,145,1)"}},"textfont":{"color":"rgba(153,205,145,1)"},"error_y":{"color":"rgba(153,205,145,1)"},"error_x":{"color":"rgba(153,205,145,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[18,32,61,93,59,45,24,22,1,1],"text":["Brand:  datsun <br>Year:  2014 <br>Count of Cars:  18","Brand:  datsun <br>Year:  2015 <br>Count of Cars:  32","Brand:  datsun <br>Year:  2016 <br>Count of Cars:  61","Brand:  datsun <br>Year:  2017 <br>Count of Cars:  93","Brand:  datsun <br>Year:  2018 <br>Count of Cars:  59","Brand:  datsun <br>Year:  2019 <br>Count of Cars:  45","Brand:  datsun <br>Year:  2020 <br>Count of Cars:  24","Brand:  datsun <br>Year:  2021 <br>Count of Cars:  22","Brand:  datsun <br>Year:  2022 <br>Count of Cars:  1","Brand:  datsun <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"datsun","marker":{"color":"rgba(165,217,129,1)","line":{"color":"rgba(165,217,129,1)"}},"textfont":{"color":"rgba(165,217,129,1)"},"error_y":{"color":"rgba(165,217,129,1)"},"error_x":{"color":"rgba(165,217,129,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2016],"y":[1],"text":"Brand:  dc <br>Year:  2016 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"dc","marker":{"color":"rgba(132,200,104,1)","line":{"color":"rgba(132,200,104,1)"}},"textfont":{"color":"rgba(132,200,104,1)"},"error_y":{"color":"rgba(132,200,104,1)"},"error_x":{"color":"rgba(132,200,104,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022],"y":[1],"text":"Brand:  ferrari <br>Year:  2022 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"ferrari","marker":{"color":"rgba(99,184,79,1)","line":{"color":"rgba(99,184,79,1)"}},"textfont":{"color":"rgba(99,184,79,1)"},"error_y":{"color":"rgba(99,184,79,1)"},"error_x":{"color":"rgba(99,184,79,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018],"y":[1,3,27,46,28,19,24,40,23,15,6,2],"text":["Brand:  fiat <br>Year:  2007 <br>Count of Cars:  1","Brand:  fiat <br>Year:  2008 <br>Count of Cars:  3","Brand:  fiat <br>Year:  2009 <br>Count of Cars:  27","Brand:  fiat <br>Year:  2010 <br>Count of Cars:  46","Brand:  fiat <br>Year:  2011 <br>Count of Cars:  28","Brand:  fiat <br>Year:  2012 <br>Count of Cars:  19","Brand:  fiat <br>Year:  2013 <br>Count of Cars:  24","Brand:  fiat <br>Year:  2014 <br>Count of Cars:  40","Brand:  fiat <br>Year:  2015 <br>Count of Cars:  23","Brand:  fiat <br>Year:  2016 <br>Count of Cars:  15","Brand:  fiat <br>Year:  2017 <br>Count of Cars:  6","Brand:  fiat <br>Year:  2018 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"fiat","marker":{"color":"rgba(66,167,55,1)","line":{"color":"rgba(66,167,55,1)"}},"textfont":{"color":"rgba(66,167,55,1)"},"error_y":{"color":"rgba(66,167,55,1)"},"error_x":{"color":"rgba(66,167,55,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2011,2012,2015,2018,2022],"y":[2,1,3,2,1],"text":["Brand:  force <br>Year:  2011 <br>Count of Cars:  2","Brand:  force <br>Year:  2012 <br>Count of Cars:  1","Brand:  force <br>Year:  2015 <br>Count of Cars:  3","Brand:  force <br>Year:  2018 <br>Count of Cars:  2","Brand:  force <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text"],"type":"bar","name":"force","marker":{"color":"rgba(79,159,59,1)","line":{"color":"rgba(79,159,59,1)"}},"textfont":{"color":"rgba(79,159,59,1)"},"error_y":{"color":"rgba(79,159,59,1)"},"error_x":{"color":"rgba(79,159,59,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021],"y":[2,1,2,5,15,12,22,74,76,64,103,116,100,125,130,152,84,50,34],"text":["Brand:  ford <br>Year:  2003 <br>Count of Cars:  2","Brand:  ford <br>Year:  2004 <br>Count of Cars:  1","Brand:  ford <br>Year:  2005 <br>Count of Cars:  2","Brand:  ford <br>Year:  2006 <br>Count of Cars:  5","Brand:  ford <br>Year:  2007 <br>Count of Cars:  15","Brand:  ford <br>Year:  2008 <br>Count of Cars:  12","Brand:  ford <br>Year:  2009 <br>Count of Cars:  22","Brand:  ford <br>Year:  2010 <br>Count of Cars:  74","Brand:  ford <br>Year:  2011 <br>Count of Cars:  76","Brand:  ford <br>Year:  2012 <br>Count of Cars:  64","Brand:  ford <br>Year:  2013 <br>Count of Cars:  103","Brand:  ford <br>Year:  2014 <br>Count of Cars:  116","Brand:  ford <br>Year:  2015 <br>Count of Cars:  100","Brand:  ford <br>Year:  2016 <br>Count of Cars:  125","Brand:  ford <br>Year:  2017 <br>Count of Cars:  130","Brand:  ford <br>Year:  2018 <br>Count of Cars:  152","Brand:  ford <br>Year:  2019 <br>Count of Cars:  84","Brand:  ford <br>Year:  2020 <br>Count of Cars:  50","Brand:  ford <br>Year:  2021 <br>Count of Cars:  34"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"ford","marker":{"color":"rgba(131,157,88,1)","line":{"color":"rgba(131,157,88,1)"}},"textfont":{"color":"rgba(131,157,88,1)"},"error_y":{"color":"rgba(131,157,88,1)"},"error_x":{"color":"rgba(131,157,88,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1989,2007,2010,2012],"y":[1,1,1,1],"text":["Brand:  hindustan motors <br>Year:  1989 <br>Count of Cars:  1","Brand:  hindustan motors <br>Year:  2007 <br>Count of Cars:  1","Brand:  hindustan motors <br>Year:  2010 <br>Count of Cars:  1","Brand:  hindustan motors <br>Year:  2012 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"hindustan motors","marker":{"color":"rgba(184,155,116,1)","line":{"color":"rgba(184,155,116,1)"}},"textfont":{"color":"rgba(184,155,116,1)"},"error_y":{"color":"rgba(184,155,116,1)"},"error_x":{"color":"rgba(184,155,116,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[2,1,2,5,18,24,107,213,206,125,205,241,539,572,367,413,338,216,109,115,60],"text":["Brand:  honda <br>Year:  2002 <br>Count of Cars:  2","Brand:  honda <br>Year:  2003 <br>Count of Cars:  1","Brand:  honda <br>Year:  2004 <br>Count of Cars:  2","Brand:  honda <br>Year:  2005 <br>Count of Cars:  5","Brand:  honda <br>Year:  2006 <br>Count of Cars:  18","Brand:  honda <br>Year:  2007 <br>Count of Cars:  24","Brand:  honda <br>Year:  2008 <br>Count of Cars:  107","Brand:  honda <br>Year:  2009 <br>Count of Cars:  213","Brand:  honda <br>Year:  2010 <br>Count of Cars:  206","Brand:  honda <br>Year:  2011 <br>Count of Cars:  125","Brand:  honda <br>Year:  2012 <br>Count of Cars:  205","Brand:  honda <br>Year:  2013 <br>Count of Cars:  241","Brand:  honda <br>Year:  2014 <br>Count of Cars:  539","Brand:  honda <br>Year:  2015 <br>Count of Cars:  572","Brand:  honda <br>Year:  2016 <br>Count of Cars:  367","Brand:  honda <br>Year:  2017 <br>Count of Cars:  413","Brand:  honda <br>Year:  2018 <br>Count of Cars:  338","Brand:  honda <br>Year:  2019 <br>Count of Cars:  216","Brand:  honda <br>Year:  2020 <br>Count of Cars:  109","Brand:  honda <br>Year:  2021 <br>Count of Cars:  115","Brand:  honda <br>Year:  2022 <br>Count of Cars:  60"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"honda","marker":{"color":"rgba(236,154,145,1)","line":{"color":"rgba(236,154,145,1)"}},"textfont":{"color":"rgba(236,154,145,1)"},"error_y":{"color":"rgba(236,154,145,1)"},"error_x":{"color":"rgba(236,154,145,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,2,3,8,10,11,167,335,357,441,450,527,709,753,692,748,632,600,368,372,146,2],"text":["Brand:  hyundai <br>Year:  2002 <br>Count of Cars:  1","Brand:  hyundai <br>Year:  2003 <br>Count of Cars:  2","Brand:  hyundai <br>Year:  2004 <br>Count of Cars:  3","Brand:  hyundai <br>Year:  2005 <br>Count of Cars:  8","Brand:  hyundai <br>Year:  2006 <br>Count of Cars:  10","Brand:  hyundai <br>Year:  2007 <br>Count of Cars:  11","Brand:  hyundai <br>Year:  2008 <br>Count of Cars:  167","Brand:  hyundai <br>Year:  2009 <br>Count of Cars:  335","Brand:  hyundai <br>Year:  2010 <br>Count of Cars:  357","Brand:  hyundai <br>Year:  2011 <br>Count of Cars:  441","Brand:  hyundai <br>Year:  2012 <br>Count of Cars:  450","Brand:  hyundai <br>Year:  2013 <br>Count of Cars:  527","Brand:  hyundai <br>Year:  2014 <br>Count of Cars:  709","Brand:  hyundai <br>Year:  2015 <br>Count of Cars:  753","Brand:  hyundai <br>Year:  2016 <br>Count of Cars:  692","Brand:  hyundai <br>Year:  2017 <br>Count of Cars:  748","Brand:  hyundai <br>Year:  2018 <br>Count of Cars:  632","Brand:  hyundai <br>Year:  2019 <br>Count of Cars:  600","Brand:  hyundai <br>Year:  2020 <br>Count of Cars:  368","Brand:  hyundai <br>Year:  2021 <br>Count of Cars:  372","Brand:  hyundai <br>Year:  2022 <br>Count of Cars:  146","Brand:  hyundai <br>Year:  2023 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"hyundai","marker":{"color":"rgba(246,129,129,1)","line":{"color":"rgba(246,129,129,1)"}},"textfont":{"color":"rgba(246,129,129,1)"},"error_y":{"color":"rgba(246,129,129,1)"},"error_x":{"color":"rgba(246,129,129,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2014,2016,2017,2018,2019,2020,2021,2022],"y":[4,3,9,10,1,1,1,1],"text":["Brand:  isuzu <br>Year:  2014 <br>Count of Cars:  4","Brand:  isuzu <br>Year:  2016 <br>Count of Cars:  3","Brand:  isuzu <br>Year:  2017 <br>Count of Cars:  9","Brand:  isuzu <br>Year:  2018 <br>Count of Cars:  10","Brand:  isuzu <br>Year:  2019 <br>Count of Cars:  1","Brand:  isuzu <br>Year:  2020 <br>Count of Cars:  1","Brand:  isuzu <br>Year:  2021 <br>Count of Cars:  1","Brand:  isuzu <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text"],"type":"bar","name":"isuzu","marker":{"color":"rgba(240,96,96,1)","line":{"color":"rgba(240,96,96,1)"}},"textfont":{"color":"rgba(240,96,96,1)"},"error_y":{"color":"rgba(240,96,96,1)"},"error_x":{"color":"rgba(240,96,96,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[5,7,16,18,14,11,13,17,10,1,1,1],"text":["Brand:  jaguar <br>Year:  2011 <br>Count of Cars:  5","Brand:  jaguar <br>Year:  2012 <br>Count of Cars:  7","Brand:  jaguar <br>Year:  2013 <br>Count of Cars:  16","Brand:  jaguar <br>Year:  2014 <br>Count of Cars:  18","Brand:  jaguar <br>Year:  2015 <br>Count of Cars:  14","Brand:  jaguar <br>Year:  2016 <br>Count of Cars:  11","Brand:  jaguar <br>Year:  2017 <br>Count of Cars:  13","Brand:  jaguar <br>Year:  2018 <br>Count of Cars:  17","Brand:  jaguar <br>Year:  2019 <br>Count of Cars:  10","Brand:  jaguar <br>Year:  2020 <br>Count of Cars:  1","Brand:  jaguar <br>Year:  2021 <br>Count of Cars:  1","Brand:  jaguar <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"jaguar","marker":{"color":"rgba(233,62,63,1)","line":{"color":"rgba(233,62,63,1)"}},"textfont":{"color":"rgba(233,62,63,1)"},"error_y":{"color":"rgba(233,62,63,1)"},"error_x":{"color":"rgba(233,62,63,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2016,2017,2018,2019,2020,2021,2022],"y":[1,101,107,63,22,48,21],"text":["Brand:  jeep <br>Year:  2016 <br>Count of Cars:  1","Brand:  jeep <br>Year:  2017 <br>Count of Cars:  101","Brand:  jeep <br>Year:  2018 <br>Count of Cars:  107","Brand:  jeep <br>Year:  2019 <br>Count of Cars:  63","Brand:  jeep <br>Year:  2020 <br>Count of Cars:  22","Brand:  jeep <br>Year:  2021 <br>Count of Cars:  48","Brand:  jeep <br>Year:  2022 <br>Count of Cars:  21"],"hoverinfo":["text","text","text","text","text","text","text"],"type":"bar","name":"jeep","marker":{"color":"rgba(227,29,30,1)","line":{"color":"rgba(227,29,30,1)"}},"textfont":{"color":"rgba(227,29,30,1)"},"error_y":{"color":"rgba(227,29,30,1)"},"error_x":{"color":"rgba(227,29,30,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2019,2020,2021,2022,2023],"y":[111,306,199,107,2],"text":["Brand:  kia <br>Year:  2019 <br>Count of Cars:  111","Brand:  kia <br>Year:  2020 <br>Count of Cars:  306","Brand:  kia <br>Year:  2021 <br>Count of Cars:  199","Brand:  kia <br>Year:  2022 <br>Count of Cars:  107","Brand:  kia <br>Year:  2023 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text","text"],"type":"bar","name":"kia","marker":{"color":"rgba(233,65,47,1)","line":{"color":"rgba(233,65,47,1)"}},"textfont":{"color":"rgba(233,65,47,1)"},"error_y":{"color":"rgba(233,65,47,1)"},"error_x":{"color":"rgba(233,65,47,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2015],"y":[2],"text":"Brand:  lamborghini <br>Year:  2015 <br>Count of Cars:  2","hoverinfo":"text","type":"bar","name":"lamborghini","marker":{"color":"rgba(240,108,69,1)","line":{"color":"rgba(240,108,69,1)"}},"textfont":{"color":"rgba(240,108,69,1)"},"error_y":{"color":"rgba(240,108,69,1)"},"error_x":{"color":"rgba(240,108,69,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[9,7,11,8,11,13,18,21,18,10,2,2,1],"text":["Brand:  land rover <br>Year:  2011 <br>Count of Cars:  9","Brand:  land rover <br>Year:  2012 <br>Count of Cars:  7","Brand:  land rover <br>Year:  2013 <br>Count of Cars:  11","Brand:  land rover <br>Year:  2014 <br>Count of Cars:  8","Brand:  land rover <br>Year:  2015 <br>Count of Cars:  11","Brand:  land rover <br>Year:  2016 <br>Count of Cars:  13","Brand:  land rover <br>Year:  2017 <br>Count of Cars:  18","Brand:  land rover <br>Year:  2018 <br>Count of Cars:  21","Brand:  land rover <br>Year:  2019 <br>Count of Cars:  18","Brand:  land rover <br>Year:  2020 <br>Count of Cars:  10","Brand:  land rover <br>Year:  2021 <br>Count of Cars:  2","Brand:  land rover <br>Year:  2022 <br>Count of Cars:  2","Brand:  land rover <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"land rover","marker":{"color":"rgba(246,151,91,1)","line":{"color":"rgba(246,151,91,1)"}},"textfont":{"color":"rgba(246,151,91,1)"},"error_y":{"color":"rgba(246,151,91,1)"},"error_x":{"color":"rgba(246,151,91,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2018,2019,2020],"y":[4,3,1],"text":["Brand:  lexus <br>Year:  2018 <br>Count of Cars:  4","Brand:  lexus <br>Year:  2019 <br>Count of Cars:  3","Brand:  lexus <br>Year:  2020 <br>Count of Cars:  1"],"hoverinfo":["text","text","text"],"type":"bar","name":"lexus","marker":{"color":"rgba(253,189,108,1)","line":{"color":"rgba(253,189,108,1)"}},"textfont":{"color":"rgba(253,189,108,1)"},"error_y":{"color":"rgba(253,189,108,1)"},"error_x":{"color":"rgba(253,189,108,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2000,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,1,4,1,4,10,4,24,20,50,99,124,207,229,260,243,217,170,116,212,114,5],"text":["Brand:  mahindra <br>Year:  2000 <br>Count of Cars:  1","Brand:  mahindra <br>Year:  2002 <br>Count of Cars:  1","Brand:  mahindra <br>Year:  2004 <br>Count of Cars:  4","Brand:  mahindra <br>Year:  2005 <br>Count of Cars:  1","Brand:  mahindra <br>Year:  2006 <br>Count of Cars:  4","Brand:  mahindra <br>Year:  2007 <br>Count of Cars:  10","Brand:  mahindra <br>Year:  2008 <br>Count of Cars:  4","Brand:  mahindra <br>Year:  2009 <br>Count of Cars:  24","Brand:  mahindra <br>Year:  2010 <br>Count of Cars:  20","Brand:  mahindra <br>Year:  2011 <br>Count of Cars:  50","Brand:  mahindra <br>Year:  2012 <br>Count of Cars:  99","Brand:  mahindra <br>Year:  2013 <br>Count of Cars:  124","Brand:  mahindra <br>Year:  2014 <br>Count of Cars:  207","Brand:  mahindra <br>Year:  2015 <br>Count of Cars:  229","Brand:  mahindra <br>Year:  2016 <br>Count of Cars:  260","Brand:  mahindra <br>Year:  2017 <br>Count of Cars:  243","Brand:  mahindra <br>Year:  2018 <br>Count of Cars:  217","Brand:  mahindra <br>Year:  2019 <br>Count of Cars:  170","Brand:  mahindra <br>Year:  2020 <br>Count of Cars:  116","Brand:  mahindra <br>Year:  2021 <br>Count of Cars:  212","Brand:  mahindra <br>Year:  2022 <br>Count of Cars:  114","Brand:  mahindra <br>Year:  2023 <br>Count of Cars:  5"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"mahindra","marker":{"color":"rgba(253,172,79,1)","line":{"color":"rgba(253,172,79,1)"}},"textfont":{"color":"rgba(253,172,79,1)"},"error_y":{"color":"rgba(253,172,79,1)"},"error_x":{"color":"rgba(253,172,79,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2007,2008,2009,2010],"y":[3,14,4,2],"text":["Brand:  mahindra renault <br>Year:  2007 <br>Count of Cars:  3","Brand:  mahindra renault <br>Year:  2008 <br>Count of Cars:  14","Brand:  mahindra renault <br>Year:  2009 <br>Count of Cars:  4","Brand:  mahindra renault <br>Year:  2010 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"mahindra renault","marker":{"color":"rgba(254,155,50,1)","line":{"color":"rgba(254,155,50,1)"}},"textfont":{"color":"rgba(254,155,50,1)"},"error_y":{"color":"rgba(254,155,50,1)"},"error_x":{"color":"rgba(254,155,50,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2013,2014,2015,2016],"y":[31,16,2,2],"text":["Brand:  mahindra ssangyong <br>Year:  2013 <br>Count of Cars:  31","Brand:  mahindra ssangyong <br>Year:  2014 <br>Count of Cars:  16","Brand:  mahindra ssangyong <br>Year:  2015 <br>Count of Cars:  2","Brand:  mahindra ssangyong <br>Year:  2016 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"mahindra ssangyong","marker":{"color":"rgba(254,139,21,1)","line":{"color":"rgba(254,139,21,1)"}},"textfont":{"color":"rgba(254,139,21,1)"},"error_y":{"color":"rgba(254,139,21,1)"},"error_x":{"color":"rgba(254,139,21,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1986,1990,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,1,1,2,3,6,2,8,9,15,23,36,52,213,331,414,365,469,579,807,836,1004,1166,1189,833,601,555,242,15],"text":["Brand:  maruti <br>Year:  1986 <br>Count of Cars:  1","Brand:  maruti <br>Year:  1990 <br>Count of Cars:  1","Brand:  maruti <br>Year:  1997 <br>Count of Cars:  1","Brand:  maruti <br>Year:  1998 <br>Count of Cars:  2","Brand:  maruti <br>Year:  1999 <br>Count of Cars:  3","Brand:  maruti <br>Year:  2000 <br>Count of Cars:  6","Brand:  maruti <br>Year:  2001 <br>Count of Cars:  2","Brand:  maruti <br>Year:  2002 <br>Count of Cars:  8","Brand:  maruti <br>Year:  2003 <br>Count of Cars:  9","Brand:  maruti <br>Year:  2004 <br>Count of Cars:  15","Brand:  maruti <br>Year:  2005 <br>Count of Cars:  23","Brand:  maruti <br>Year:  2006 <br>Count of Cars:  36","Brand:  maruti <br>Year:  2007 <br>Count of Cars:  52","Brand:  maruti <br>Year:  2008 <br>Count of Cars:  213","Brand:  maruti <br>Year:  2009 <br>Count of Cars:  331","Brand:  maruti <br>Year:  2010 <br>Count of Cars:  414","Brand:  maruti <br>Year:  2011 <br>Count of Cars:  365","Brand:  maruti <br>Year:  2012 <br>Count of Cars:  469","Brand:  maruti <br>Year:  2013 <br>Count of Cars:  579","Brand:  maruti <br>Year:  2014 <br>Count of Cars:  807","Brand:  maruti <br>Year:  2015 <br>Count of Cars:  836","Brand:  maruti <br>Year:  2016 <br>Count of Cars:  1004","Brand:  maruti <br>Year:  2017 <br>Count of Cars:  1166","Brand:  maruti <br>Year:  2018 <br>Count of Cars:  1189","Brand:  maruti <br>Year:  2019 <br>Count of Cars:  833","Brand:  maruti <br>Year:  2020 <br>Count of Cars:  601","Brand:  maruti <br>Year:  2021 <br>Count of Cars:  555","Brand:  maruti <br>Year:  2022 <br>Count of Cars:  242","Brand:  maruti <br>Year:  2023 <br>Count of Cars:  15"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"maruti","marker":{"color":"rgba(251,130,15,1)","line":{"color":"rgba(251,130,15,1)"}},"textfont":{"color":"rgba(251,130,15,1)"},"error_y":{"color":"rgba(251,130,15,1)"},"error_x":{"color":"rgba(251,130,15,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2016],"y":[1],"text":"Brand:  maserati <br>Year:  2016 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"maserati","marker":{"color":"rgba(237,143,71,1)","line":{"color":"rgba(237,143,71,1)"}},"textfont":{"color":"rgba(237,143,71,1)"},"error_y":{"color":"rgba(237,143,71,1)"},"error_x":{"color":"rgba(237,143,71,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,1,6,5,13,19,37,63,46,76,89,105,80,101,102,70,30,31,24,5],"text":["Brand:  mercedes-benz <br>Year:  2004 <br>Count of Cars:  1","Brand:  mercedes-benz <br>Year:  2005 <br>Count of Cars:  1","Brand:  mercedes-benz <br>Year:  2006 <br>Count of Cars:  6","Brand:  mercedes-benz <br>Year:  2007 <br>Count of Cars:  5","Brand:  mercedes-benz <br>Year:  2008 <br>Count of Cars:  13","Brand:  mercedes-benz <br>Year:  2009 <br>Count of Cars:  19","Brand:  mercedes-benz <br>Year:  2010 <br>Count of Cars:  37","Brand:  mercedes-benz <br>Year:  2011 <br>Count of Cars:  63","Brand:  mercedes-benz <br>Year:  2012 <br>Count of Cars:  46","Brand:  mercedes-benz <br>Year:  2013 <br>Count of Cars:  76","Brand:  mercedes-benz <br>Year:  2014 <br>Count of Cars:  89","Brand:  mercedes-benz <br>Year:  2015 <br>Count of Cars:  105","Brand:  mercedes-benz <br>Year:  2016 <br>Count of Cars:  80","Brand:  mercedes-benz <br>Year:  2017 <br>Count of Cars:  101","Brand:  mercedes-benz <br>Year:  2018 <br>Count of Cars:  102","Brand:  mercedes-benz <br>Year:  2019 <br>Count of Cars:  70","Brand:  mercedes-benz <br>Year:  2020 <br>Count of Cars:  30","Brand:  mercedes-benz <br>Year:  2021 <br>Count of Cars:  31","Brand:  mercedes-benz <br>Year:  2022 <br>Count of Cars:  24","Brand:  mercedes-benz <br>Year:  2023 <br>Count of Cars:  5"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"mercedes-benz","marker":{"color":"rgba(223,157,127,1)","line":{"color":"rgba(223,157,127,1)"}},"textfont":{"color":"rgba(223,157,127,1)"},"error_y":{"color":"rgba(223,157,127,1)"},"error_x":{"color":"rgba(223,157,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2019,2020,2021,2022],"y":[87,129,147,56],"text":["Brand:  mg <br>Year:  2019 <br>Count of Cars:  87","Brand:  mg <br>Year:  2020 <br>Count of Cars:  129","Brand:  mg <br>Year:  2021 <br>Count of Cars:  147","Brand:  mg <br>Year:  2022 <br>Count of Cars:  56"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"mg","marker":{"color":"rgba(209,170,183,1)","line":{"color":"rgba(209,170,183,1)"}},"textfont":{"color":"rgba(209,170,183,1)"},"error_y":{"color":"rgba(209,170,183,1)"},"error_x":{"color":"rgba(209,170,183,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[3,3,5,6,2,1,2,2,1,1,2],"text":["Brand:  mini <br>Year:  2012 <br>Count of Cars:  3","Brand:  mini <br>Year:  2013 <br>Count of Cars:  3","Brand:  mini <br>Year:  2014 <br>Count of Cars:  5","Brand:  mini <br>Year:  2015 <br>Count of Cars:  6","Brand:  mini <br>Year:  2016 <br>Count of Cars:  2","Brand:  mini <br>Year:  2017 <br>Count of Cars:  1","Brand:  mini <br>Year:  2018 <br>Count of Cars:  2","Brand:  mini <br>Year:  2019 <br>Count of Cars:  2","Brand:  mini <br>Year:  2020 <br>Count of Cars:  1","Brand:  mini <br>Year:  2021 <br>Count of Cars:  1","Brand:  mini <br>Year:  2022 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"mini","marker":{"color":"rgba(190,164,206,1)","line":{"color":"rgba(190,164,206,1)"}},"textfont":{"color":"rgba(190,164,206,1)"},"error_y":{"color":"rgba(190,164,206,1)"},"error_x":{"color":"rgba(190,164,206,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2001,2002,2003,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017,2019,2020],"y":[1,1,2,4,7,14,5,3,10,9,15,7,2,1,2],"text":["Brand:  mitsubishi <br>Year:  2001 <br>Count of Cars:  1","Brand:  mitsubishi <br>Year:  2002 <br>Count of Cars:  1","Brand:  mitsubishi <br>Year:  2003 <br>Count of Cars:  2","Brand:  mitsubishi <br>Year:  2007 <br>Count of Cars:  4","Brand:  mitsubishi <br>Year:  2009 <br>Count of Cars:  7","Brand:  mitsubishi <br>Year:  2010 <br>Count of Cars:  14","Brand:  mitsubishi <br>Year:  2011 <br>Count of Cars:  5","Brand:  mitsubishi <br>Year:  2012 <br>Count of Cars:  3","Brand:  mitsubishi <br>Year:  2013 <br>Count of Cars:  10","Brand:  mitsubishi <br>Year:  2014 <br>Count of Cars:  9","Brand:  mitsubishi <br>Year:  2015 <br>Count of Cars:  15","Brand:  mitsubishi <br>Year:  2016 <br>Count of Cars:  7","Brand:  mitsubishi <br>Year:  2017 <br>Count of Cars:  2","Brand:  mitsubishi <br>Year:  2019 <br>Count of Cars:  1","Brand:  mitsubishi <br>Year:  2020 <br>Count of Cars:  2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"mitsubishi","marker":{"color":"rgba(165,133,191,1)","line":{"color":"rgba(165,133,191,1)"}},"textfont":{"color":"rgba(165,133,191,1)"},"error_y":{"color":"rgba(165,133,191,1)"},"error_x":{"color":"rgba(165,133,191,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2006,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,12,46,75,92,120,60,44,35,26,11,6,69,39,1],"text":["Brand:  nissan <br>Year:  2006 <br>Count of Cars:  1","Brand:  nissan <br>Year:  2010 <br>Count of Cars:  12","Brand:  nissan <br>Year:  2011 <br>Count of Cars:  46","Brand:  nissan <br>Year:  2012 <br>Count of Cars:  75","Brand:  nissan <br>Year:  2013 <br>Count of Cars:  92","Brand:  nissan <br>Year:  2014 <br>Count of Cars:  120","Brand:  nissan <br>Year:  2015 <br>Count of Cars:  60","Brand:  nissan <br>Year:  2016 <br>Count of Cars:  44","Brand:  nissan <br>Year:  2017 <br>Count of Cars:  35","Brand:  nissan <br>Year:  2018 <br>Count of Cars:  26","Brand:  nissan <br>Year:  2019 <br>Count of Cars:  11","Brand:  nissan <br>Year:  2020 <br>Count of Cars:  6","Brand:  nissan <br>Year:  2021 <br>Count of Cars:  69","Brand:  nissan <br>Year:  2022 <br>Count of Cars:  39","Brand:  nissan <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"nissan","marker":{"color":"rgba(140,102,175,1)","line":{"color":"rgba(140,102,175,1)"}},"textfont":{"color":"rgba(140,102,175,1)"},"error_y":{"color":"rgba(140,102,175,1)"},"error_x":{"color":"rgba(140,102,175,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2005],"y":[1],"text":"Brand:  opel <br>Year:  2005 <br>Count of Cars:  1","hoverinfo":"text","type":"bar","name":"opel","marker":{"color":"rgba(115,72,159,1)","line":{"color":"rgba(115,72,159,1)"}},"textfont":{"color":"rgba(115,72,159,1)"},"error_y":{"color":"rgba(115,72,159,1)"},"error_x":{"color":"rgba(115,72,159,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2022],"y":[1,3,1,6,6,3,2,2,1,1,1],"text":["Brand:  porsche <br>Year:  2010 <br>Count of Cars:  1","Brand:  porsche <br>Year:  2011 <br>Count of Cars:  3","Brand:  porsche <br>Year:  2012 <br>Count of Cars:  1","Brand:  porsche <br>Year:  2013 <br>Count of Cars:  6","Brand:  porsche <br>Year:  2014 <br>Count of Cars:  6","Brand:  porsche <br>Year:  2015 <br>Count of Cars:  3","Brand:  porsche <br>Year:  2016 <br>Count of Cars:  2","Brand:  porsche <br>Year:  2017 <br>Count of Cars:  2","Brand:  porsche <br>Year:  2018 <br>Count of Cars:  1","Brand:  porsche <br>Year:  2019 <br>Count of Cars:  1","Brand:  porsche <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"porsche","marker":{"color":"rgba(130,93,153,1)","line":{"color":"rgba(130,93,153,1)"}},"textfont":{"color":"rgba(130,93,153,1)"},"error_y":{"color":"rgba(130,93,153,1)"},"error_x":{"color":"rgba(130,93,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2012],"y":[2],"text":"Brand:  premier <br>Year:  2012 <br>Count of Cars:  2","hoverinfo":"text","type":"bar","name":"premier","marker":{"color":"rgba(169,144,153,1)","line":{"color":"rgba(169,144,153,1)"}},"textfont":{"color":"rgba(169,144,153,1)"},"error_y":{"color":"rgba(169,144,153,1)"},"error_x":{"color":"rgba(169,144,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[3,43,115,77,59,159,146,124,100,71,92,31],"text":["Brand:  renault <br>Year:  2011 <br>Count of Cars:  3","Brand:  renault <br>Year:  2012 <br>Count of Cars:  43","Brand:  renault <br>Year:  2013 <br>Count of Cars:  115","Brand:  renault <br>Year:  2014 <br>Count of Cars:  77","Brand:  renault <br>Year:  2015 <br>Count of Cars:  59","Brand:  renault <br>Year:  2016 <br>Count of Cars:  159","Brand:  renault <br>Year:  2017 <br>Count of Cars:  146","Brand:  renault <br>Year:  2018 <br>Count of Cars:  124","Brand:  renault <br>Year:  2019 <br>Count of Cars:  100","Brand:  renault <br>Year:  2020 <br>Count of Cars:  71","Brand:  renault <br>Year:  2021 <br>Count of Cars:  92","Brand:  renault <br>Year:  2022 <br>Count of Cars:  31"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"renault","marker":{"color":"rgba(208,194,153,1)","line":{"color":"rgba(208,194,153,1)"}},"textfont":{"color":"rgba(208,194,153,1)"},"error_y":{"color":"rgba(208,194,153,1)"},"error_x":{"color":"rgba(208,194,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2001,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[1,1,4,4,26,17,53,83,109,74,91,113,76,86,62,50,35,64,63],"text":["Brand:  skoda <br>Year:  2001 <br>Count of Cars:  1","Brand:  skoda <br>Year:  2005 <br>Count of Cars:  1","Brand:  skoda <br>Year:  2006 <br>Count of Cars:  4","Brand:  skoda <br>Year:  2007 <br>Count of Cars:  4","Brand:  skoda <br>Year:  2008 <br>Count of Cars:  26","Brand:  skoda <br>Year:  2009 <br>Count of Cars:  17","Brand:  skoda <br>Year:  2010 <br>Count of Cars:  53","Brand:  skoda <br>Year:  2011 <br>Count of Cars:  83","Brand:  skoda <br>Year:  2012 <br>Count of Cars:  109","Brand:  skoda <br>Year:  2013 <br>Count of Cars:  74","Brand:  skoda <br>Year:  2014 <br>Count of Cars:  91","Brand:  skoda <br>Year:  2015 <br>Count of Cars:  113","Brand:  skoda <br>Year:  2016 <br>Count of Cars:  76","Brand:  skoda <br>Year:  2017 <br>Count of Cars:  86","Brand:  skoda <br>Year:  2018 <br>Count of Cars:  62","Brand:  skoda <br>Year:  2019 <br>Count of Cars:  50","Brand:  skoda <br>Year:  2020 <br>Count of Cars:  35","Brand:  skoda <br>Year:  2021 <br>Count of Cars:  64","Brand:  skoda <br>Year:  2022 <br>Count of Cars:  63"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"skoda","marker":{"color":"rgba(247,245,153,1)","line":{"color":"rgba(247,245,153,1)"}},"textfont":{"color":"rgba(247,245,153,1)"},"error_y":{"color":"rgba(247,245,153,1)"},"error_x":{"color":"rgba(247,245,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,2,5,5,9,10,21,78,65,62,59,65,62,83,197,301,254,198,319,208,1],"text":["Brand:  tata <br>Year:  2003 <br>Count of Cars:  1","Brand:  tata <br>Year:  2004 <br>Count of Cars:  2","Brand:  tata <br>Year:  2005 <br>Count of Cars:  5","Brand:  tata <br>Year:  2006 <br>Count of Cars:  5","Brand:  tata <br>Year:  2007 <br>Count of Cars:  9","Brand:  tata <br>Year:  2008 <br>Count of Cars:  10","Brand:  tata <br>Year:  2009 <br>Count of Cars:  21","Brand:  tata <br>Year:  2010 <br>Count of Cars:  78","Brand:  tata <br>Year:  2011 <br>Count of Cars:  65","Brand:  tata <br>Year:  2012 <br>Count of Cars:  62","Brand:  tata <br>Year:  2013 <br>Count of Cars:  59","Brand:  tata <br>Year:  2014 <br>Count of Cars:  65","Brand:  tata <br>Year:  2015 <br>Count of Cars:  62","Brand:  tata <br>Year:  2016 <br>Count of Cars:  83","Brand:  tata <br>Year:  2017 <br>Count of Cars:  197","Brand:  tata <br>Year:  2018 <br>Count of Cars:  301","Brand:  tata <br>Year:  2019 <br>Count of Cars:  254","Brand:  tata <br>Year:  2020 <br>Count of Cars:  198","Brand:  tata <br>Year:  2021 <br>Count of Cars:  319","Brand:  tata <br>Year:  2022 <br>Count of Cars:  208","Brand:  tata <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"tata","marker":{"color":"rgba(238,219,128,1)","line":{"color":"rgba(238,219,128,1)"}},"textfont":{"color":"rgba(238,219,128,1)"},"error_y":{"color":"rgba(238,219,128,1)"},"error_x":{"color":"rgba(238,219,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[1,1,1,1,9,11,18,25,37,56,69,67,100,98,100,102,110,101,81,58,67,51,1],"text":["Brand:  toyota <br>Year:  2001 <br>Count of Cars:  1","Brand:  toyota <br>Year:  2002 <br>Count of Cars:  1","Brand:  toyota <br>Year:  2003 <br>Count of Cars:  1","Brand:  toyota <br>Year:  2004 <br>Count of Cars:  1","Brand:  toyota <br>Year:  2005 <br>Count of Cars:  9","Brand:  toyota <br>Year:  2006 <br>Count of Cars:  11","Brand:  toyota <br>Year:  2007 <br>Count of Cars:  18","Brand:  toyota <br>Year:  2008 <br>Count of Cars:  25","Brand:  toyota <br>Year:  2009 <br>Count of Cars:  37","Brand:  toyota <br>Year:  2010 <br>Count of Cars:  56","Brand:  toyota <br>Year:  2011 <br>Count of Cars:  69","Brand:  toyota <br>Year:  2012 <br>Count of Cars:  67","Brand:  toyota <br>Year:  2013 <br>Count of Cars:  100","Brand:  toyota <br>Year:  2014 <br>Count of Cars:  98","Brand:  toyota <br>Year:  2015 <br>Count of Cars:  100","Brand:  toyota <br>Year:  2016 <br>Count of Cars:  102","Brand:  toyota <br>Year:  2017 <br>Count of Cars:  110","Brand:  toyota <br>Year:  2018 <br>Count of Cars:  101","Brand:  toyota <br>Year:  2019 <br>Count of Cars:  81","Brand:  toyota <br>Year:  2020 <br>Count of Cars:  58","Brand:  toyota <br>Year:  2021 <br>Count of Cars:  67","Brand:  toyota <br>Year:  2022 <br>Count of Cars:  51","Brand:  toyota <br>Year:  2023 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"toyota","marker":{"color":"rgba(217,175,99,1)","line":{"color":"rgba(217,175,99,1)"}},"textfont":{"color":"rgba(217,175,99,1)"},"error_y":{"color":"rgba(217,175,99,1)"},"error_x":{"color":"rgba(217,175,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[2,54,124,106,122,114,117,116,92,64,44,36,32,21],"text":["Brand:  volkswagen <br>Year:  2009 <br>Count of Cars:  2","Brand:  volkswagen <br>Year:  2010 <br>Count of Cars:  54","Brand:  volkswagen <br>Year:  2011 <br>Count of Cars:  124","Brand:  volkswagen <br>Year:  2012 <br>Count of Cars:  106","Brand:  volkswagen <br>Year:  2013 <br>Count of Cars:  122","Brand:  volkswagen <br>Year:  2014 <br>Count of Cars:  114","Brand:  volkswagen <br>Year:  2015 <br>Count of Cars:  117","Brand:  volkswagen <br>Year:  2016 <br>Count of Cars:  116","Brand:  volkswagen <br>Year:  2017 <br>Count of Cars:  92","Brand:  volkswagen <br>Year:  2018 <br>Count of Cars:  64","Brand:  volkswagen <br>Year:  2019 <br>Count of Cars:  44","Brand:  volkswagen <br>Year:  2020 <br>Count of Cars:  36","Brand:  volkswagen <br>Year:  2021 <br>Count of Cars:  32","Brand:  volkswagen <br>Year:  2022 <br>Count of Cars:  21"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"volkswagen","marker":{"color":"rgba(197,132,69,1)","line":{"color":"rgba(197,132,69,1)"}},"textfont":{"color":"rgba(197,132,69,1)"},"error_y":{"color":"rgba(197,132,69,1)"},"error_x":{"color":"rgba(197,132,69,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"y":[1,2,5,13,11,15,21,12,20,16,4,7,5,1],"text":["Brand:  volvo <br>Year:  2009 <br>Count of Cars:  1","Brand:  volvo <br>Year:  2010 <br>Count of Cars:  2","Brand:  volvo <br>Year:  2011 <br>Count of Cars:  5","Brand:  volvo <br>Year:  2012 <br>Count of Cars:  13","Brand:  volvo <br>Year:  2013 <br>Count of Cars:  11","Brand:  volvo <br>Year:  2014 <br>Count of Cars:  15","Brand:  volvo <br>Year:  2015 <br>Count of Cars:  21","Brand:  volvo <br>Year:  2016 <br>Count of Cars:  12","Brand:  volvo <br>Year:  2017 <br>Count of Cars:  20","Brand:  volvo <br>Year:  2018 <br>Count of Cars:  16","Brand:  volvo <br>Year:  2019 <br>Count of Cars:  4","Brand:  volvo <br>Year:  2020 <br>Count of Cars:  7","Brand:  volvo <br>Year:  2021 <br>Count of Cars:  5","Brand:  volvo <br>Year:  2022 <br>Count of Cars:  1"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"volvo","marker":{"color":"rgba(177,89,40,1)","line":{"color":"rgba(177,89,40,1)"}},"textfont":{"color":"rgba(177,89,40,1)"},"error_y":{"color":"rgba(177,89,40,1)"},"error_x":{"color":"rgba(177,89,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+</section>
+<section id="distribution-of-transmission-types-by-brand" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-of-transmission-types-by-brand">Distribution of Transmission Types by Brand</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stacked_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(brand, transmission) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>interactive_stacked_bar <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> stacked_data,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>brand,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>count,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="sc">~</span>transmission,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"bar"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">colors =</span> <span class="fu">colorRampPalette</span>(RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">3</span>, <span class="st">"Set1"</span>))(<span class="fu">length</span>(<span class="fu">unique</span>(stacked_data<span class="sc">$</span>transmission))),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand: "</span>, brand,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Transmission: "</span>, transmission,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Count: "</span>, count</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">hoverinfo =</span> <span class="st">"text"</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">barmode =</span> <span class="st">"stack"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Transmission Types by Brand"</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Brand"</span>),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Count"</span>),</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Transmission"</span>))</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>interactive_stacked_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-495c36e9ab2ee7e1d47e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-495c36e9ab2ee7e1d47e">{"x":{"visdat":{"ca7c6484f39e":["function () ","plotlyVisDat"]},"cur_data":"ca7c6484f39e","attrs":{"ca7c6484f39e":{"x":{},"y":{},"text":{},"hoverinfo":"text","color":{},"colors":["#E41A1C","#4DAF4A"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","title":"Distribution of Transmission Types by Brand","xaxis":{"domain":[0,1],"automargin":true,"title":"Brand","type":"category","categoryorder":"array","categoryarray":["ashok leyland","aston martin","audi","bajaj","bentley","bmw","chevrolet","citroen","datsun","dc","ferrari","fiat","force","ford","hindustan motors","honda","hyundai","isuzu","jaguar","jeep","kia","lamborghini","land rover","lexus","mahindra","mahindra renault","mahindra ssangyong","maruti","maserati","mercedes-benz","mg","mini","mitsubishi","nissan","opel","porsche","premier","renault","skoda","tata","toyota","volkswagen","volvo"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"legend":{"title":{"text":"Transmission"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["aston martin","audi","bentley","bmw","chevrolet","citroen","datsun","ferrari","ford","honda","hyundai","isuzu","jaguar","jeep","kia","lamborghini","land rover","lexus","mahindra","mahindra ssangyong","maruti","maserati","mercedes-benz","mg","mini","mitsubishi","nissan","porsche","renault","skoda","tata","toyota","volkswagen","volvo"],"y":[1,649,3,739,33,6,19,1,159,826,1122,7,114,141,271,2,131,8,366,35,1036,1,890,242,28,39,83,26,183,454,440,357,252,133],"text":["Brand:  aston martin <br>Transmission:  automatic <br>Count:  1","Brand:  audi <br>Transmission:  automatic <br>Count:  649","Brand:  bentley <br>Transmission:  automatic <br>Count:  3","Brand:  bmw <br>Transmission:  automatic <br>Count:  739","Brand:  chevrolet <br>Transmission:  automatic <br>Count:  33","Brand:  citroen <br>Transmission:  automatic <br>Count:  6","Brand:  datsun <br>Transmission:  automatic <br>Count:  19","Brand:  ferrari <br>Transmission:  automatic <br>Count:  1","Brand:  ford <br>Transmission:  automatic <br>Count:  159","Brand:  honda <br>Transmission:  automatic <br>Count:  826","Brand:  hyundai <br>Transmission:  automatic <br>Count:  1122","Brand:  isuzu <br>Transmission:  automatic <br>Count:  7","Brand:  jaguar <br>Transmission:  automatic <br>Count:  114","Brand:  jeep <br>Transmission:  automatic <br>Count:  141","Brand:  kia <br>Transmission:  automatic <br>Count:  271","Brand:  lamborghini <br>Transmission:  automatic <br>Count:  2","Brand:  land rover <br>Transmission:  automatic <br>Count:  131","Brand:  lexus <br>Transmission:  automatic <br>Count:  8","Brand:  mahindra <br>Transmission:  automatic <br>Count:  366","Brand:  mahindra ssangyong <br>Transmission:  automatic <br>Count:  35","Brand:  maruti <br>Transmission:  automatic <br>Count:  1036","Brand:  maserati <br>Transmission:  automatic <br>Count:  1","Brand:  mercedes-benz <br>Transmission:  automatic <br>Count:  890","Brand:  mg <br>Transmission:  automatic <br>Count:  242","Brand:  mini <br>Transmission:  automatic <br>Count:  28","Brand:  mitsubishi <br>Transmission:  automatic <br>Count:  39","Brand:  nissan <br>Transmission:  automatic <br>Count:  83","Brand:  porsche <br>Transmission:  automatic <br>Count:  26","Brand:  renault <br>Transmission:  automatic <br>Count:  183","Brand:  skoda <br>Transmission:  automatic <br>Count:  454","Brand:  tata <br>Transmission:  automatic <br>Count:  440","Brand:  toyota <br>Transmission:  automatic <br>Count:  357","Brand:  volkswagen <br>Transmission:  automatic <br>Count:  252","Brand:  volvo <br>Transmission:  automatic <br>Count:  133"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"automatic","marker":{"color":"rgba(228,26,28,1)","line":{"color":"rgba(228,26,28,1)"}},"textfont":{"color":"rgba(228,26,28,1)"},"error_y":{"color":"rgba(228,26,28,1)"},"error_x":{"color":"rgba(228,26,28,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["ashok leyland","audi","bajaj","chevrolet","citroen","datsun","dc","fiat","force","ford","hindustan motors","honda","hyundai","isuzu","jeep","kia","mahindra","mahindra renault","mahindra ssangyong","maruti","mercedes-benz","mg","mitsubishi","nissan","opel","porsche","premier","renault","skoda","tata","toyota","volkswagen"],"y":[1,13,3,824,1,337,1,234,9,1008,4,3052,6212,23,222,454,1749,23,16,8742,14,177,44,554,1,1,2,837,558,1565,808,792],"text":["Brand:  ashok leyland <br>Transmission:  manual <br>Count:  1","Brand:  audi <br>Transmission:  manual <br>Count:  13","Brand:  bajaj <br>Transmission:  manual <br>Count:  3","Brand:  chevrolet <br>Transmission:  manual <br>Count:  824","Brand:  citroen <br>Transmission:  manual <br>Count:  1","Brand:  datsun <br>Transmission:  manual <br>Count:  337","Brand:  dc <br>Transmission:  manual <br>Count:  1","Brand:  fiat <br>Transmission:  manual <br>Count:  234","Brand:  force <br>Transmission:  manual <br>Count:  9","Brand:  ford <br>Transmission:  manual <br>Count:  1008","Brand:  hindustan motors <br>Transmission:  manual <br>Count:  4","Brand:  honda <br>Transmission:  manual <br>Count:  3052","Brand:  hyundai <br>Transmission:  manual <br>Count:  6212","Brand:  isuzu <br>Transmission:  manual <br>Count:  23","Brand:  jeep <br>Transmission:  manual <br>Count:  222","Brand:  kia <br>Transmission:  manual <br>Count:  454","Brand:  mahindra <br>Transmission:  manual <br>Count:  1749","Brand:  mahindra renault <br>Transmission:  manual <br>Count:  23","Brand:  mahindra ssangyong <br>Transmission:  manual <br>Count:  16","Brand:  maruti <br>Transmission:  manual <br>Count:  8742","Brand:  mercedes-benz <br>Transmission:  manual <br>Count:  14","Brand:  mg <br>Transmission:  manual <br>Count:  177","Brand:  mitsubishi <br>Transmission:  manual <br>Count:  44","Brand:  nissan <br>Transmission:  manual <br>Count:  554","Brand:  opel <br>Transmission:  manual <br>Count:  1","Brand:  porsche <br>Transmission:  manual <br>Count:  1","Brand:  premier <br>Transmission:  manual <br>Count:  2","Brand:  renault <br>Transmission:  manual <br>Count:  837","Brand:  skoda <br>Transmission:  manual <br>Count:  558","Brand:  tata <br>Transmission:  manual <br>Count:  1565","Brand:  toyota <br>Transmission:  manual <br>Count:  808","Brand:  volkswagen <br>Transmission:  manual <br>Count:  792"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"bar","name":"manual","marker":{"color":"rgba(77,175,74,1)","line":{"color":"rgba(77,175,74,1)"}},"textfont":{"color":"rgba(77,175,74,1)"},"error_y":{"color":"rgba(77,175,74,1)"},"error_x":{"color":"rgba(77,175,74,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+</section>
+<section id="average-car-price-by-year-line-chart" class="level3">
+<h3 class="anchored" data-anchor-id="average-car-price-by-year-line-chart">Average Car Price by Year (Line Chart)</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>line_chart_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(myear) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>interactive_line_chart <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> line_chart_data,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>myear,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>avg_price,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"scatter"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"lines+markers"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">line =</span> <span class="fu">list</span>(<span class="at">width =</span> <span class="dv">2</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Year: "</span>, myear,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Average Price: $"</span>, <span class="fu">round</span>(avg_price, <span class="dv">2</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">hoverinfo =</span> <span class="st">"text"</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Average Car Price by Year (Line Chart)"</span>, <span class="at">font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">24</span>)),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>),</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Average Price"</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>interactive_line_chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-b9ad0623e832a5ddb690" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-b9ad0623e832a5ddb690">{"x":{"visdat":{"ca7c53a7fec2":["function () ","plotlyVisDat"]},"cur_data":"ca7c53a7fec2","attrs":{"ca7c53a7fec2":{"x":{},"y":{},"mode":"lines+markers","marker":{"size":8},"line":{"width":2},"text":{},"hoverinfo":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":{"text":"Average Car Price by Year (Line Chart)","font":{"size":24}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Average Price"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1986,1989,1990,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[150000,200000,40000,350000,75000,130000,64656.571428571428,286838.59999999998,103214.21428571429,111967.27777777778,140429.5,141694.51785714284,210604.26732673269,245072.43930635825,180714.38080959496,216157.32789699547,252681.21180124237,358589.44709141151,412524.36181640625,480817.13732259197,547084.2071346374,676604.03885184019,917783.3555032413,916869.51829112857,1012958.4143676517,1112551.3725289712,1228074.3039785405,1345816.4559967227,1597840.2141099267,3111828.1428571432],"mode":"lines+markers","marker":{"color":"rgba(31,119,180,1)","size":8,"line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)","width":2},"text":["Year:  1986 <br>Average Price: $ 150000","Year:  1989 <br>Average Price: $ 2e+05","Year:  1990 <br>Average Price: $ 40000","Year:  1997 <br>Average Price: $ 350000","Year:  1998 <br>Average Price: $ 75000","Year:  1999 <br>Average Price: $ 130000","Year:  2000 <br>Average Price: $ 64656.57","Year:  2001 <br>Average Price: $ 286838.6","Year:  2002 <br>Average Price: $ 103214.21","Year:  2003 <br>Average Price: $ 111967.28","Year:  2004 <br>Average Price: $ 140429.5","Year:  2005 <br>Average Price: $ 141694.52","Year:  2006 <br>Average Price: $ 210604.27","Year:  2007 <br>Average Price: $ 245072.44","Year:  2008 <br>Average Price: $ 180714.38","Year:  2009 <br>Average Price: $ 216157.33","Year:  2010 <br>Average Price: $ 252681.21","Year:  2011 <br>Average Price: $ 358589.45","Year:  2012 <br>Average Price: $ 412524.36","Year:  2013 <br>Average Price: $ 480817.14","Year:  2014 <br>Average Price: $ 547084.21","Year:  2015 <br>Average Price: $ 676604.04","Year:  2016 <br>Average Price: $ 917783.36","Year:  2017 <br>Average Price: $ 916869.52","Year:  2018 <br>Average Price: $ 1012958.41","Year:  2019 <br>Average Price: $ 1112551.37","Year:  2020 <br>Average Price: $ 1228074.3","Year:  2021 <br>Average Price: $ 1345816.46","Year:  2022 <br>Average Price: $ 1597840.21","Year:  2023 <br>Average Price: $ 3111828.14"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+</section>
+<section id="average-car-price-by-brand-interactive-bar-graph" class="level3">
+<h3 class="anchored" data-anchor-id="average-car-price-by-brand-interactive-bar-graph">Average Car Price by Brand (Interactive Bar Graph)</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>interactive_bar_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(brand) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>interactive_bar_graph <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> interactive_bar_data,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>brand,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>avg_price,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"bar"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="sc">~</span>brand,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">colors =</span> <span class="fu">colorRampPalette</span>(RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">12</span>, <span class="st">"Paired"</span>))(<span class="fu">length</span>(<span class="fu">unique</span>(interactive_bar_data<span class="sc">$</span>brand))),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand: "</span>, brand,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;Average Price: $"</span>, <span class="fu">round</span>(avg_price, <span class="dv">2</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">hoverinfo =</span> <span class="st">"text"</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Car Price by Brand (Interactive)"</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Car Brand"</span>, <span class="at">tickangle =</span> <span class="dv">45</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Average Price"</span>),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Car Brand"</span>))</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>interactive_bar_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c8fb67909ef350e8ad6a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c8fb67909ef350e8ad6a">{"x":{"visdat":{"ca7c720bcbdd":["function () ","plotlyVisDat"]},"cur_data":"ca7c720bcbdd","attrs":{"ca7c720bcbdd":{"x":{},"y":{},"text":{},"hoverinfo":"text","color":{},"colors":["#A6CEE3","#82B7D6","#5FA0CA","#3B8ABE","#257CB2","#4C97A7","#72B29C","#99CD91","#A5D981","#84C868","#63B84F","#42A737","#4F9F3B","#839D58","#B89B74","#EC9A91","#F68181","#F06060","#E93E3F","#E31D1E","#E9412F","#F06C45","#F6975B","#FDBD6C","#FDAC4F","#FE9B32","#FE8B15","#FB820F","#ED8F47","#DF9D7F","#D1AAB7","#BEA4CE","#A585BF","#8C66AF","#73489F","#825D99","#A99099","#D0C299","#F7F599","#EEDB80","#D9AF63","#C58445","#B15928"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Average Car Price by Brand (Interactive)","xaxis":{"domain":[0,1],"automargin":true,"title":"Car Brand","tickangle":45,"type":"category","categoryorder":"array","categoryarray":["ashok leyland","aston martin","audi","bajaj","bentley","bmw","chevrolet","citroen","datsun","dc","ferrari","fiat","force","ford","hindustan motors","honda","hyundai","isuzu","jaguar","jeep","kia","lamborghini","land rover","lexus","mahindra","mahindra renault","mahindra ssangyong","maruti","maserati","mercedes-benz","mg","mini","mitsubishi","nissan","opel","porsche","premier","renault","skoda","tata","toyota","volkswagen","volvo"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Average Price"},"legend":{"title":{"text":"Car Brand"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["ashok leyland"],"y":[350000],"text":"Brand:  ashok leyland <br>Average Price: $ 350000","hoverinfo":"text","type":"bar","name":"ashok leyland","marker":{"color":"rgba(166,206,227,1)","line":{"color":"rgba(166,206,227,1)"}},"textfont":{"color":"rgba(166,206,227,1)"},"error_y":{"color":"rgba(166,206,227,1)"},"error_x":{"color":"rgba(166,206,227,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["aston martin"],"y":[21100000],"text":"Brand:  aston martin <br>Average Price: $ 21100000","hoverinfo":"text","type":"bar","name":"aston martin","marker":{"color":"rgba(130,183,214,1)","line":{"color":"rgba(130,183,214,1)"}},"textfont":{"color":"rgba(130,183,214,1)"},"error_y":{"color":"rgba(130,183,214,1)"},"error_x":{"color":"rgba(130,183,214,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["audi"],"y":[2060479.2024169182],"text":"Brand:  audi <br>Average Price: $ 2060479.2","hoverinfo":"text","type":"bar","name":"audi","marker":{"color":"rgba(95,160,202,1)","line":{"color":"rgba(95,160,202,1)"}},"textfont":{"color":"rgba(95,160,202,1)"},"error_y":{"color":"rgba(95,160,202,1)"},"error_x":{"color":"rgba(95,160,202,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bajaj"],"y":[251666.66666666666],"text":"Brand:  bajaj <br>Average Price: $ 251666.67","hoverinfo":"text","type":"bar","name":"bajaj","marker":{"color":"rgba(59,138,190,1)","line":{"color":"rgba(59,138,190,1)"}},"textfont":{"color":"rgba(59,138,190,1)"},"error_y":{"color":"rgba(59,138,190,1)"},"error_x":{"color":"rgba(59,138,190,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bentley"],"y":[8916666.666666666],"text":"Brand:  bentley <br>Average Price: $ 8916666.67","hoverinfo":"text","type":"bar","name":"bentley","marker":{"color":"rgba(37,124,178,1)","line":{"color":"rgba(37,124,178,1)"}},"textfont":{"color":"rgba(37,124,178,1)"},"error_y":{"color":"rgba(37,124,178,1)"},"error_x":{"color":"rgba(37,124,178,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bmw"],"y":[2716987.0825439789],"text":"Brand:  bmw <br>Average Price: $ 2716987.08","hoverinfo":"text","type":"bar","name":"bmw","marker":{"color":"rgba(76,151,167,1)","line":{"color":"rgba(76,151,167,1)"}},"textfont":{"color":"rgba(76,151,167,1)"},"error_y":{"color":"rgba(76,151,167,1)"},"error_x":{"color":"rgba(76,151,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["chevrolet"],"y":[190860.34772462066],"text":"Brand:  chevrolet <br>Average Price: $ 190860.35","hoverinfo":"text","type":"bar","name":"chevrolet","marker":{"color":"rgba(114,178,156,1)","line":{"color":"rgba(114,178,156,1)"}},"textfont":{"color":"rgba(114,178,156,1)"},"error_y":{"color":"rgba(114,178,156,1)"},"error_x":{"color":"rgba(114,178,156,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["citroen"],"y":[2707005.8571428573],"text":"Brand:  citroen <br>Average Price: $ 2707005.86","hoverinfo":"text","type":"bar","name":"citroen","marker":{"color":"rgba(153,205,145,1)","line":{"color":"rgba(153,205,145,1)"}},"textfont":{"color":"rgba(153,205,145,1)"},"error_y":{"color":"rgba(153,205,145,1)"},"error_x":{"color":"rgba(153,205,145,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["datsun"],"y":[282664.0365168539],"text":"Brand:  datsun <br>Average Price: $ 282664.04","hoverinfo":"text","type":"bar","name":"datsun","marker":{"color":"rgba(165,217,129,1)","line":{"color":"rgba(165,217,129,1)"}},"textfont":{"color":"rgba(165,217,129,1)"},"error_y":{"color":"rgba(165,217,129,1)"},"error_x":{"color":"rgba(165,217,129,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dc"],"y":[1800000],"text":"Brand:  dc <br>Average Price: $ 1800000","hoverinfo":"text","type":"bar","name":"dc","marker":{"color":"rgba(132,200,104,1)","line":{"color":"rgba(132,200,104,1)"}},"textfont":{"color":"rgba(132,200,104,1)"},"error_y":{"color":"rgba(132,200,104,1)"},"error_x":{"color":"rgba(132,200,104,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["ferrari"],"y":[44425000],"text":"Brand:  ferrari <br>Average Price: $ 44425000","hoverinfo":"text","type":"bar","name":"ferrari","marker":{"color":"rgba(99,184,79,1)","line":{"color":"rgba(99,184,79,1)"}},"textfont":{"color":"rgba(99,184,79,1)"},"error_y":{"color":"rgba(99,184,79,1)"},"error_x":{"color":"rgba(99,184,79,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["fiat"],"y":[235069.87606837609],"text":"Brand:  fiat <br>Average Price: $ 235069.88","hoverinfo":"text","type":"bar","name":"fiat","marker":{"color":"rgba(66,167,55,1)","line":{"color":"rgba(66,167,55,1)"}},"textfont":{"color":"rgba(66,167,55,1)"},"error_y":{"color":"rgba(66,167,55,1)"},"error_x":{"color":"rgba(66,167,55,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["force"],"y":[585986.22222222225],"text":"Brand:  force <br>Average Price: $ 585986.22","hoverinfo":"text","type":"bar","name":"force","marker":{"color":"rgba(79,159,59,1)","line":{"color":"rgba(79,159,59,1)"}},"textfont":{"color":"rgba(79,159,59,1)"},"error_y":{"color":"rgba(79,159,59,1)"},"error_x":{"color":"rgba(79,159,59,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["ford"],"y":[1084002.1045415602],"text":"Brand:  ford <br>Average Price: $ 1084002.1","hoverinfo":"text","type":"bar","name":"ford","marker":{"color":"rgba(131,157,88,1)","line":{"color":"rgba(131,157,88,1)"}},"textfont":{"color":"rgba(131,157,88,1)"},"error_y":{"color":"rgba(131,157,88,1)"},"error_x":{"color":"rgba(131,157,88,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["hindustan motors"],"y":[188063.25],"text":"Brand:  hindustan motors <br>Average Price: $ 188063.25","hoverinfo":"text","type":"bar","name":"hindustan motors","marker":{"color":"rgba(184,155,116,1)","line":{"color":"rgba(184,155,116,1)"}},"textfont":{"color":"rgba(184,155,116,1)"},"error_y":{"color":"rgba(184,155,116,1)"},"error_x":{"color":"rgba(184,155,116,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["honda"],"y":[552738.12454873801],"text":"Brand:  honda <br>Average Price: $ 552738.12","hoverinfo":"text","type":"bar","name":"honda","marker":{"color":"rgba(236,154,145,1)","line":{"color":"rgba(236,154,145,1)"}},"textfont":{"color":"rgba(236,154,145,1)"},"error_y":{"color":"rgba(236,154,145,1)"},"error_x":{"color":"rgba(236,154,145,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["hyundai"],"y":[554815.8707390246],"text":"Brand:  hyundai <br>Average Price: $ 554815.87","hoverinfo":"text","type":"bar","name":"hyundai","marker":{"color":"rgba(246,129,129,1)","line":{"color":"rgba(246,129,129,1)"}},"textfont":{"color":"rgba(246,129,129,1)"},"error_y":{"color":"rgba(246,129,129,1)"},"error_x":{"color":"rgba(246,129,129,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["isuzu"],"y":[1298014.6000000001],"text":"Brand:  isuzu <br>Average Price: $ 1298014.6","hoverinfo":"text","type":"bar","name":"isuzu","marker":{"color":"rgba(240,96,96,1)","line":{"color":"rgba(240,96,96,1)"}},"textfont":{"color":"rgba(240,96,96,1)"},"error_y":{"color":"rgba(240,96,96,1)"},"error_x":{"color":"rgba(240,96,96,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["jaguar"],"y":[3040002.131578947],"text":"Brand:  jaguar <br>Average Price: $ 3040002.13","hoverinfo":"text","type":"bar","name":"jaguar","marker":{"color":"rgba(233,62,63,1)","line":{"color":"rgba(233,62,63,1)"}},"textfont":{"color":"rgba(233,62,63,1)"},"error_y":{"color":"rgba(233,62,63,1)"},"error_x":{"color":"rgba(233,62,63,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["jeep"],"y":[1690032.867768595],"text":"Brand:  jeep <br>Average Price: $ 1690032.87","hoverinfo":"text","type":"bar","name":"jeep","marker":{"color":"rgba(227,29,30,1)","line":{"color":"rgba(227,29,30,1)"}},"textfont":{"color":"rgba(227,29,30,1)"},"error_y":{"color":"rgba(227,29,30,1)"},"error_x":{"color":"rgba(227,29,30,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["kia"],"y":[1420138.255172414],"text":"Brand:  kia <br>Average Price: $ 1420138.26","hoverinfo":"text","type":"bar","name":"kia","marker":{"color":"rgba(233,65,47,1)","line":{"color":"rgba(233,65,47,1)"}},"textfont":{"color":"rgba(233,65,47,1)"},"error_y":{"color":"rgba(233,65,47,1)"},"error_x":{"color":"rgba(233,65,47,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["lamborghini"],"y":[22500000],"text":"Brand:  lamborghini <br>Average Price: $ 22500000","hoverinfo":"text","type":"bar","name":"lamborghini","marker":{"color":"rgba(240,108,69,1)","line":{"color":"rgba(240,108,69,1)"}},"textfont":{"color":"rgba(240,108,69,1)"},"error_y":{"color":"rgba(240,108,69,1)"},"error_x":{"color":"rgba(240,108,69,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["land rover"],"y":[4115621.5190839693],"text":"Brand:  land rover <br>Average Price: $ 4115621.52","hoverinfo":"text","type":"bar","name":"land rover","marker":{"color":"rgba(246,151,91,1)","line":{"color":"rgba(246,151,91,1)"}},"textfont":{"color":"rgba(246,151,91,1)"},"error_y":{"color":"rgba(246,151,91,1)"},"error_x":{"color":"rgba(246,151,91,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["lexus"],"y":[6861680.75],"text":"Brand:  lexus <br>Average Price: $ 6861680.75","hoverinfo":"text","type":"bar","name":"lexus","marker":{"color":"rgba(253,189,108,1)","line":{"color":"rgba(253,189,108,1)"}},"textfont":{"color":"rgba(253,189,108,1)"},"error_y":{"color":"rgba(253,189,108,1)"},"error_x":{"color":"rgba(253,189,108,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mahindra"],"y":[876930.890780141],"text":"Brand:  mahindra <br>Average Price: $ 876930.89","hoverinfo":"text","type":"bar","name":"mahindra","marker":{"color":"rgba(253,172,79,1)","line":{"color":"rgba(253,172,79,1)"}},"textfont":{"color":"rgba(253,172,79,1)"},"error_y":{"color":"rgba(253,172,79,1)"},"error_x":{"color":"rgba(253,172,79,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mahindra renault"],"y":[116380.21739130435],"text":"Brand:  mahindra renault <br>Average Price: $ 116380.22","hoverinfo":"text","type":"bar","name":"mahindra renault","marker":{"color":"rgba(254,155,50,1)","line":{"color":"rgba(254,155,50,1)"}},"textfont":{"color":"rgba(254,155,50,1)"},"error_y":{"color":"rgba(254,155,50,1)"},"error_x":{"color":"rgba(254,155,50,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mahindra ssangyong"],"y":[668817.23529411759],"text":"Brand:  mahindra ssangyong <br>Average Price: $ 668817.24","hoverinfo":"text","type":"bar","name":"mahindra ssangyong","marker":{"color":"rgba(254,139,21,1)","line":{"color":"rgba(254,139,21,1)"}},"textfont":{"color":"rgba(254,139,21,1)"},"error_y":{"color":"rgba(254,139,21,1)"},"error_x":{"color":"rgba(254,139,21,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["maruti"],"y":[472836.37645735289],"text":"Brand:  maruti <br>Average Price: $ 472836.38","hoverinfo":"text","type":"bar","name":"maruti","marker":{"color":"rgba(251,130,15,1)","line":{"color":"rgba(251,130,15,1)"}},"textfont":{"color":"rgba(251,130,15,1)"},"error_y":{"color":"rgba(251,130,15,1)"},"error_x":{"color":"rgba(251,130,15,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["maserati"],"y":[5990000],"text":"Brand:  maserati <br>Average Price: $ 5990000","hoverinfo":"text","type":"bar","name":"maserati","marker":{"color":"rgba(237,143,71,1)","line":{"color":"rgba(237,143,71,1)"}},"textfont":{"color":"rgba(237,143,71,1)"},"error_y":{"color":"rgba(237,143,71,1)"},"error_x":{"color":"rgba(237,143,71,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mercedes-benz"],"y":[2958249.4856194677],"text":"Brand:  mercedes-benz <br>Average Price: $ 2958249.49","hoverinfo":"text","type":"bar","name":"mercedes-benz","marker":{"color":"rgba(223,157,127,1)","line":{"color":"rgba(223,157,127,1)"}},"textfont":{"color":"rgba(223,157,127,1)"},"error_y":{"color":"rgba(223,157,127,1)"},"error_x":{"color":"rgba(223,157,127,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mg"],"y":[1780691.1145584728],"text":"Brand:  mg <br>Average Price: $ 1780691.11","hoverinfo":"text","type":"bar","name":"mg","marker":{"color":"rgba(209,170,183,1)","line":{"color":"rgba(209,170,183,1)"}},"textfont":{"color":"rgba(209,170,183,1)"},"error_y":{"color":"rgba(209,170,183,1)"},"error_x":{"color":"rgba(209,170,183,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mini"],"y":[2655780.1428571427],"text":"Brand:  mini <br>Average Price: $ 2655780.14","hoverinfo":"text","type":"bar","name":"mini","marker":{"color":"rgba(190,164,206,1)","line":{"color":"rgba(190,164,206,1)"}},"textfont":{"color":"rgba(190,164,206,1)"},"error_y":{"color":"rgba(190,164,206,1)"},"error_x":{"color":"rgba(190,164,206,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["mitsubishi"],"y":[843187.92771084339],"text":"Brand:  mitsubishi <br>Average Price: $ 843187.93","hoverinfo":"text","type":"bar","name":"mitsubishi","marker":{"color":"rgba(165,133,191,1)","line":{"color":"rgba(165,133,191,1)"}},"textfont":{"color":"rgba(165,133,191,1)"},"error_y":{"color":"rgba(165,133,191,1)"},"error_x":{"color":"rgba(165,133,191,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["nissan"],"y":[445196.26216640498],"text":"Brand:  nissan <br>Average Price: $ 445196.26","hoverinfo":"text","type":"bar","name":"nissan","marker":{"color":"rgba(140,102,175,1)","line":{"color":"rgba(140,102,175,1)"}},"textfont":{"color":"rgba(140,102,175,1)"},"error_y":{"color":"rgba(140,102,175,1)"},"error_x":{"color":"rgba(140,102,175,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["opel"],"y":[100000],"text":"Brand:  opel <br>Average Price: $ 1e+05","hoverinfo":"text","type":"bar","name":"opel","marker":{"color":"rgba(115,72,159,1)","line":{"color":"rgba(115,72,159,1)"}},"textfont":{"color":"rgba(115,72,159,1)"},"error_y":{"color":"rgba(115,72,159,1)"},"error_x":{"color":"rgba(115,72,159,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["porsche"],"y":[4393940.7037037034],"text":"Brand:  porsche <br>Average Price: $ 4393940.7","hoverinfo":"text","type":"bar","name":"porsche","marker":{"color":"rgba(130,93,153,1)","line":{"color":"rgba(130,93,153,1)"}},"textfont":{"color":"rgba(130,93,153,1)"},"error_y":{"color":"rgba(130,93,153,1)"},"error_x":{"color":"rgba(130,93,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["premier"],"y":[145000],"text":"Brand:  premier <br>Average Price: $ 145000","hoverinfo":"text","type":"bar","name":"premier","marker":{"color":"rgba(169,144,153,1)","line":{"color":"rgba(169,144,153,1)"}},"textfont":{"color":"rgba(169,144,153,1)"},"error_y":{"color":"rgba(169,144,153,1)"},"error_x":{"color":"rgba(169,144,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["renault"],"y":[471345.83725490206],"text":"Brand:  renault <br>Average Price: $ 471345.84","hoverinfo":"text","type":"bar","name":"renault","marker":{"color":"rgba(208,194,153,1)","line":{"color":"rgba(208,194,153,1)"}},"textfont":{"color":"rgba(208,194,153,1)"},"error_y":{"color":"rgba(208,194,153,1)"},"error_x":{"color":"rgba(208,194,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["skoda"],"y":[817626.96245059278],"text":"Brand:  skoda <br>Average Price: $ 817626.96","hoverinfo":"text","type":"bar","name":"skoda","marker":{"color":"rgba(247,245,153,1)","line":{"color":"rgba(247,245,153,1)"}},"textfont":{"color":"rgba(247,245,153,1)"},"error_y":{"color":"rgba(247,245,153,1)"},"error_x":{"color":"rgba(247,245,153,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["tata"],"y":[749902.06633416412],"text":"Brand:  tata <br>Average Price: $ 749902.07","hoverinfo":"text","type":"bar","name":"tata","marker":{"color":"rgba(238,219,128,1)","line":{"color":"rgba(238,219,128,1)"}},"textfont":{"color":"rgba(238,219,128,1)"},"error_y":{"color":"rgba(238,219,128,1)"},"error_x":{"color":"rgba(238,219,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["toyota"],"y":[1242224.6635193126],"text":"Brand:  toyota <br>Average Price: $ 1242224.66","hoverinfo":"text","type":"bar","name":"toyota","marker":{"color":"rgba(217,175,99,1)","line":{"color":"rgba(217,175,99,1)"}},"textfont":{"color":"rgba(217,175,99,1)"},"error_y":{"color":"rgba(217,175,99,1)"},"error_x":{"color":"rgba(217,175,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["volkswagen"],"y":[543449.73371647473],"text":"Brand:  volkswagen <br>Average Price: $ 543449.73","hoverinfo":"text","type":"bar","name":"volkswagen","marker":{"color":"rgba(197,132,69,1)","line":{"color":"rgba(197,132,69,1)"}},"textfont":{"color":"rgba(197,132,69,1)"},"error_y":{"color":"rgba(197,132,69,1)"},"error_x":{"color":"rgba(197,132,69,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["volvo"],"y":[2547750.3157894732],"text":"Brand:  volvo <br>Average Price: $ 2547750.32","hoverinfo":"text","type":"bar","name":"volvo","marker":{"color":"rgba(177,89,40,1)","line":{"color":"rgba(177,89,40,1)"}},"textfont":{"color":"rgba(177,89,40,1)"},"error_y":{"color":"rgba(177,89,40,1)"},"error_x":{"color":"rgba(177,89,40,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="key-insights" class="level2">
+<h2 class="anchored" data-anchor-id="key-insights">Key Insights</h2>
+<p><img src="images/clipboard-2000054794.png" class="img-fluid" width="350"></p>
+<p>The dataset shows a lot about car prices and how they relate to various factors. Listed below are the key insights deduced from our analysis.</p>
+<p><strong>Distribution of Price:</strong> There is a marked pattern in the prices of cars, which stay within a particular bracket for the majority of cases.</p>
+<p><strong>Mileage vs Price:</strong> [Positive/negative] mileage versus price relationship indicates that [Key Finding].</p>
+<p><strong>Brand Analysis:</strong> Some car brands hold their value more than others as depicted in the different visualizations.</p>
+<footer style="text-align: center; margin-top: 20px;">
+<p>© 2024 Car Price Prediction Project</p>
+</footer>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

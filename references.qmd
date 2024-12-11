@@ -1,0 +1,11 @@
+1.  ggplot function - RDocumentation. (n.d.). https://www.rdocumentation.org/packages/ggplot2/versions/3.3.5/topics/ggplot
+
+2.  Kuhn, M. (2019, March 27). The caret Package. <https://topepo.github.io/caret/>
+
+3.  LinearRegression. (n.d.). Scikit-learn. <https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.LinearRegression.html>
+
+4.  Machine Learning Random Forest Algorithm - JavatPoint. (n.d.). www.javatpoint.com. https://www.javatpoint.com/machine-learning-random-forest-algorithm
+
+5.  UCI Machine Learning Repository. (n.d.). <https://archive.ics.uci.edu/datasets>
+
+     

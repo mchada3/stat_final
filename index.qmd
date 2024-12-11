@@ -1,0 +1,76 @@
+# **Car Price Prediction Project**
+
+### **Team 9**
+
+------------------------------------------------------------------------
+
+### Meet the Team
+
+1.  Medha Chada
+
+2.  Bharath Vardhan Reddy Ravula
+
+3.  Rishika Reddy Baddam
+
+------------------------------------------------------------------------
+
+![](images/clipboard-419203215.png){width="646"}
+
+Welcome to our work in the **Car Price Prediction and Analysis project** to explore significant insights on pricing, value retention by brand, and trend of drive-type. We will answer several critical questions in the modern automotive market using statistical modeling supported by data-driven analysis.
+
+------------------------------------------------------------------------
+
+## Project Overview
+
+Cars are a big investment, and knowing the factors that drive their pricing and value retention is going to be very important to buyers, sellers, and car manufacturers. We analyze a comprehensive and cleaned dataset that will show trends and patterns of car prices and attributes.
+
+------------------------------------------------------------------------
+
+## Objectives
+
+::: {style="display: flex; gap: 20px; align-items: flex-start;"}
+::: {style="flex: 2;"}
+Our research focuses on answering the following questions:
+
+**What determines the listed price of a car?**
+
+Key variables for car price estimation include: mileage, brand, body type, kilometers driven, exterior color, and ownership history.
+
+**How does mileage vary across different car brands and models?**
+
+This analysis discusses the relation between car brand, its specific model, and the respective mileage performance of it; this can be quite important for the potential buyer and for a market analyst.
+
+**Are there trends in drive types based on car brands or year of manufacture?**
+
+We conduct analyses by various car brands and year of manufacture of the trends for such drive types as FWD, RWD, and AWD, all to the benefit of an in-depth insight into market trends and brand strategy.
+:::
+
+::: {style="flex: 1;"}
+![Car Market](images/clipboard-3921365773.png)
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Methodology
+
+-   **Data Cleaning**: We prepared a high-quality dataset by cleaning and organizing some variables such as `listed_price`, `OEM`, `body`, `km`, `exterior_color`, and `owner_type`.
+-   **Statistical Modeling**: Strong methods of our predictive models are based on analyzing the relationships between attributes and prices of cars. •⁠ ⁠
+-   **Visualization:** Interactive and static visualizations provide a deeper understanding of the trends and patterns in our data.
+
+------------------------------------------------------------------------
+
+## Explore the Project
+
+-   [**Data**](data.qmd): Dive into our cleaned dataset and initial exploratory analysis.
+-   [**Analysis**](analysis.qmd): Discover the statistical models and methods used.
+-   [**Results**](results.qmd): View insights from our research questions.
+-   [**About**](about.qmd): Meet the team behind this project.
+
+------------------------------------------------------------------------
+
+<footer style="text-align: center; margin-top: 20px;">
+
+© 2024 Car Price Prediction Project
+
+</footer>

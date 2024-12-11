@@ -1,0 +1,195 @@
+# Data Overview
+
+Our analysis relies on the extensive data on cars, their respective characteristics, or attributes. The data we used in our work have undergone extensive cleaning and thus guarantee good quality and uniformity. Important variables to note include the following:
+
+-   **Year of Manufacture (`myear`)**: Year in which the car was made.
+-   **Listed Price (`price`)**: Listed price of the car
+-   **Transmission (`transmission`)**: What transmission it is (ex. Manual, auto.).
+-   **Mileage (`mileage`)**: Total distance the car has been driven, in kilometers.
+-   **Exterior Color (`Color`)**: Color of the car.
+-   **Drive Type (`Drive Type`)**: Type of drivetrain: FWD, RWD, or 2WD.
+-   **Brand (`brand`)**: Brand of the car; for example, Maruti, Honda, Hyundai.
+-   **Fuel Type (`fuel`)**: Type of fuel used by the car; for example, CNG.
+-   **Body Type (`body`)**: Body type of the car; for example, sedan, hatchback, MUV.
+
+------------------------------------------------------------------------
+
+## Summary Statistics
+
+Below are key insights derived from the dataset:
+
+```{r }
+library(tidyverse)
+library(plotly)
+library(RColorBrewer)
+
+# Load the dataset
+data <- read.csv("finalclean_cars_data.csv")
+
+# Summary of the dataset
+summary(data)
+
+# Check for missing values
+sum(is.na(data))
+
+# Display column data types
+str(data)
+```
+
+------------------------------------------------------------------------
+
+## Visualizations
+
+### Total Count of Cars by Year and Brand
+
+```{r }
+# Aggregate data
+aggregated_data <- data %>%
+  group_by(myear, brand) %>%
+  summarise(count = n(), .groups = "drop")
+
+# Create the plot
+interactive_stacked_bar <- plot_ly(
+  data = aggregated_data,
+  x = ~myear,
+  y = ~count,
+  color = ~brand,
+  type = "bar",
+  colors = colorRampPalette(RColorBrewer::brewer.pal(12, "Paired"))(length(unique(aggregated_data$brand))),
+  text = ~paste(
+    "Brand: ", brand,
+    "<br>Year: ", myear,
+    "<br>Count of Cars: ", count
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    barmode = "stack",
+    title = list(text = "Total Count of Cars by Year and Brand (Interactive)", font = list(size = 24)),
+    xaxis = list(title = "Year"),
+    yaxis = list(title = "Count of Cars"),
+    legend = list(title = list(text = "Brand"))
+  )
+interactive_stacked_bar
+```
+
+------------------------------------------------------------------------
+
+### Distribution of Transmission Types by Brand
+
+```{r }
+# Aggregate data
+stacked_data <- data %>%
+  group_by(brand, transmission) %>%
+  summarise(count = n(), .groups = "drop")
+
+# Create the plot
+interactive_stacked_bar <- plot_ly(
+  data = stacked_data,
+  x = ~brand,
+  y = ~count,
+  color = ~transmission,
+  type = "bar",
+  colors = colorRampPalette(RColorBrewer::brewer.pal(3, "Set1"))(length(unique(stacked_data$transmission))),
+  text = ~paste(
+    "Brand: ", brand,
+    "<br>Transmission: ", transmission,
+    "<br>Count: ", count
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "Distribution of Transmission Types by Brand",
+    xaxis = list(title = "Brand"),
+    yaxis = list(title = "Count"),
+    legend = list(title = list(text = "Transmission"))
+  )
+interactive_stacked_bar
+```
+
+------------------------------------------------------------------------
+
+### Average Car Price by Year (Line Chart)
+
+```{r }
+# Aggregate data
+line_chart_data <- data %>%
+  group_by(myear) %>%
+  summarise(avg_price = mean(price, na.rm = TRUE), .groups = "drop")
+
+# Create the plot
+interactive_line_chart <- plot_ly(
+  data = line_chart_data,
+  x = ~myear,
+  y = ~avg_price,
+  type = "scatter",
+  mode = "lines+markers",
+  marker = list(size = 8),
+  line = list(width = 2),
+  text = ~paste(
+    "Year: ", myear,
+    "<br>Average Price: $", round(avg_price, 2)
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(text = "Average Car Price by Year (Line Chart)", font = list(size = 24)),
+    xaxis = list(title = "Year"),
+    yaxis = list(title = "Average Price")
+  )
+interactive_line_chart
+```
+
+------------------------------------------------------------------------
+
+### Average Car Price by Brand (Interactive Bar Graph)
+
+```{r }
+# Aggregate data
+interactive_bar_data <- data %>%
+  group_by(brand) %>%
+  summarise(avg_price = mean(price, na.rm = TRUE), .groups = "drop")
+
+# Create the plot
+interactive_bar_graph <- plot_ly(
+  data = interactive_bar_data,
+  x = ~brand,
+  y = ~avg_price,
+  type = "bar",
+  color = ~brand,
+  colors = colorRampPalette(RColorBrewer::brewer.pal(12, "Paired"))(length(unique(interactive_bar_data$brand))),
+  text = ~paste(
+    "Brand: ", brand,
+    "<br>Average Price: $", round(avg_price, 2)
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = "Average Car Price by Brand (Interactive)",
+    xaxis = list(title = "Car Brand", tickangle = 45),
+    yaxis = list(title = "Average Price"),
+    legend = list(title = list(text = "Car Brand"))
+  )
+interactive_bar_graph
+```
+
+------------------------------------------------------------------------
+
+## Key Insights
+
+![](images/clipboard-2000054794.png){width="350"}
+
+The dataset shows a lot about car prices and how they relate to various factors. Listed below are the key insights deduced from our analysis.
+
+**Distribution of Price:** There is a marked pattern in the prices of cars, which stay within a particular bracket for the majority of cases.
+
+**Mileage vs Price:** \[Positive/negative\] mileage versus price relationship indicates that \[Key Finding\].
+
+**Brand Analysis:** Some car brands hold their value more than others as depicted in the different visualizations.
+
+<footer style="text-align: center; margin-top: 20px;">
+
+© 2024 Car Price Prediction Project
+
+</footer>
